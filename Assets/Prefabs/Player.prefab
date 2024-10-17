@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 3639536930002975250}
   m_Layer: 0
   m_Name: Ball
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -81,8 +81,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01b4baa9cb7d69b48be730a4dec5490e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  acceleration: 10
   minimalSpeed: 5
+  acceleration: 10
 --- !u!135 &3912986174282741121
 SphereCollider:
   m_ObjectHideFlags: 0
