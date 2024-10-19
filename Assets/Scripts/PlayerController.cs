@@ -1,4 +1,4 @@
-// Total changes: 4
+// Total changes: 5
 
 using BSGames.Modules.GroundCheck;
 using Gaskellgames.CameraController; // TODO: move to "health" script
@@ -21,8 +21,8 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        _groundCheck = GetComponent<GroundCheck>();
         _rigidbody = GetComponent<Rigidbody>();
+        _groundCheck = GetComponent<GroundCheck>();
 
         // Change #2: set size to initial scale
         _size = _rigidbody.transform.localScale.magnitude;
@@ -30,30 +30,27 @@ public class PlayerController : MonoBehaviour
         GetComponent<CameraShaker>().Activate(); // TODO: move to "health" script
     }
 
-    private float _movementX;
-    private float _movementY;
+    private float _inputRoll;
+    private float _inputSpeed;
 
     private void OnMove(InputValue value)
     {
         var movementVector = value.Get<Vector2>();
-        _movementX = movementVector.x;
-        _movementY = movementVector.y;
+        _inputRoll = movementVector.x;
+        _inputSpeed = movementVector.y;
     }
 
     private void FixedUpdate()
     {
-        // Documentation of "Ground Checking Kit" asset
-        var x = _groundCheck.IsGrounded() ? _movementX : 0.0f;
-
+        var x = _inputRoll;
         // Change #3: set minimum speed if it's too low
-        var z = _rigidbody.velocity.z < minimalSpeed ? minimalSpeed : _movementY;
-        // TODO: prevent speed from going too low
+        var z = _rigidbody.velocity.z < minimalSpeed ? minimalSpeed : _inputSpeed;
 
-        // Documentation of "Ground Checking Kit" asset
-        var movement = _groundCheck.IsGrounded() ? new Vector3(x, 0.0f, z) : new Vector3();
+        // Change #4: disable input movement if not grounded
+        if (!_groundCheck.IsGrounded()) x = z = 0.0f;
+
+        var movement = new Vector3(x, 0.0f, z);
         _rigidbody.AddForce(movement * (acceleration + _size));
-
-        Debug.Log(_rigidbody.velocity.z); // TODO: remove after testing
     }
 
     /* Source of method:
@@ -66,7 +63,7 @@ public class PlayerController : MonoBehaviour
             pickUp.transform.parent = transform;
             _size += size;
 
-            // Change #4: disable collider
+            // Change #5: disable collider
             pickUp.gameObject.GetComponent<Collider>().enabled = false;
 
             /* Source:
