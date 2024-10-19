@@ -42,12 +42,18 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        var movement = new Vector3(
-            // Documentation of "Ground Checking Kit" asset
-            _groundCheck.IsGrounded() ? _movementX : 0.0f, 0.0f,
-            // Change #3: set speed to minimum
-            _rigidbody.velocity.z < minimalSpeed ? minimalSpeed : _movementY);
+        // Documentation of "Ground Checking Kit" asset
+        var x = _groundCheck.IsGrounded() ? _movementX : 0.0f;
+
+        // Change #3: set minimum speed if it's too low
+        var z = _rigidbody.velocity.z < minimalSpeed ? minimalSpeed : _movementY;
+        // TODO: prevent speed from going too low
+
+        // Documentation of "Ground Checking Kit" asset
+        var movement = _groundCheck.IsGrounded() ? new Vector3(x, 0.0f, z) : new Vector3();
         _rigidbody.AddForce(movement * (acceleration + _size));
+
+        Debug.Log(_rigidbody.velocity.z); // TODO: remove after testing
     }
 
     /* Source of method:
