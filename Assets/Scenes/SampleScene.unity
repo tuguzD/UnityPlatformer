@@ -864,6 +864,11 @@ PrefabInstance:
       propertyPath: m_AngularDrag
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 1333073185178226399, guid: 8f81d409d0c6fd441930348cf4dcef81,
+        type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2089593812689133927, guid: 8f81d409d0c6fd441930348cf4dcef81,
         type: 3}
       propertyPath: followOffset.y
