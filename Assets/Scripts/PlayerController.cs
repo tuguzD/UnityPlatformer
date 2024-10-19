@@ -1,11 +1,10 @@
+// Total changes: 4
+
 using Gaskellgames.CameraController; // TODO: move to "health" script
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-/* Whole source: https://www.youtube.com/watch?v=FsYI9D3aukY&list=PLD8pFQ5A8vv6U4Sm0JKdcNGGOOZNoX2lv&index=2
- * Method "OnCollisionEnter" from: https://www.youtube.com/watch?v=StATWcqq4po&t=950s
- * Changes: 4
- */
+// Source of class: https://www.youtube.com/watch?v=FsYI9D3aukY&list=PLD8pFQ5A8vv6U4Sm0JKdcNGGOOZNoX2lv&index=2
 public class PlayerController : MonoBehaviour
 {
     // Change #1: add speed minimum
@@ -43,6 +42,7 @@ public class PlayerController : MonoBehaviour
         _rigidbody.AddForce(movement * (acceleration + _size));
     }
 
+    // Source of method: https://www.youtube.com/watch?v=StATWcqq4po&t=950s
     private void OnCollisionEnter(Collision pickUp)
     {
         var size = pickUp.transform.localScale.magnitude;
@@ -53,6 +53,9 @@ public class PlayerController : MonoBehaviour
 
             // Change #4: disable collider
             pickUp.gameObject.GetComponent<Collider>().enabled = false;
+
+            // Source: https://github.com/deviantdear/RollABall/blob/master/Assets/Scripts/PlayerController.cs#L74
+            pickUp.gameObject.GetComponent<Rotator>().enabled = false;
         }
     }
 }
