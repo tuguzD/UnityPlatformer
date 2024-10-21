@@ -359,7 +359,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Material
       value: 
-      objectReference: {fileID: 13400000, guid: 33403be3e23cad348806c2f89bab267c,
+      objectReference: {fileID: 13400000, guid: 33d97ccd003c7d5439d2c252082051fb,
         type: 2}
     - target: {fileID: 6396115302730960482, guid: 8f81d409d0c6fd441930348cf4dcef81,
         type: 3}
@@ -1145,7 +1145,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Material
       value: 
-      objectReference: {fileID: 13400000, guid: f02c1ef57187d974a8f93d378ba19fae,
+      objectReference: {fileID: 13400000, guid: 2aecb03724967da408dcc8b6a3fa5414,
         type: 2}
     - target: {fileID: 6396115302730960482, guid: 8f81d409d0c6fd441930348cf4dcef81,
         type: 3}

@@ -16,7 +16,7 @@ MonoBehaviour:
   radius: 0.6
   groundLayers:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 1
   triggerInteraction: 0
   tagsToIgnore:
   - Player
