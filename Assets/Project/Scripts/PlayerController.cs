@@ -1,4 +1,4 @@
-// Total changes: 5
+// Total changes: 4
 
 using BSGames.Modules.GroundCheck;
 using Ditzelgames;
@@ -64,15 +64,6 @@ public class PlayerController : MonoBehaviour
         {
             pickUp.transform.parent = transform;
             _size += size;
-
-            // Change #5: disable collider
-            pickUp.gameObject.GetComponent<Collider>().enabled = false;
-            pickUp.gameObject.GetComponent<MagneticTool>().IsStatic = true;
-            Destroy(pickUp.gameObject.GetComponent<Rigidbody>());
-
-            /* Source:
-             * https://github.com/deviantdear/RollABall/blob/master/Assets/Scripts/PlayerController.cs#L74 */
-            pickUp.gameObject.GetComponent<Rotator>().enabled = false;
         }
     }
 }
