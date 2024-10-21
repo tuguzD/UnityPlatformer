@@ -291,7 +291,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &222679003
 Transform:
   m_ObjectHideFlags: 0
@@ -385,6 +385,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player (Smooth)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7562962934770653944, guid: 8f81d409d0c6fd441930348cf4dcef81,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7562962934770653945, guid: 8f81d409d0c6fd441930348cf4dcef81,
         type: 3}
@@ -1166,6 +1171,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player (Rough)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7562962934770653944, guid: 8f81d409d0c6fd441930348cf4dcef81,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7562962934770653945, guid: 8f81d409d0c6fd441930348cf4dcef81,
         type: 3}
