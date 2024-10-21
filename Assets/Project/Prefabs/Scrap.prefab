@@ -11,8 +11,10 @@ GameObject:
   - component: {fileID: 3797888073242243783}
   - component: {fileID: 9034711216522939974}
   - component: {fileID: 6325575740273522795}
-  - component: {fileID: 7397744233915422658}
   - component: {fileID: 1935839312216307433}
+  - component: {fileID: 7397744233915422658}
+  - component: {fileID: 2149920667443855532}
+  - component: {fileID: 4258637557119525205}
   m_Layer: 0
   m_Name: Scrap
   m_TagString: PickUp
@@ -85,6 +87,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &1935839312216307433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6045543604457452466}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d7bb5f445d0ccf45b37d7c81ee151eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotation: 30
 --- !u!65 &7397744233915422658
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -100,13 +115,40 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1935839312216307433
+--- !u!54 &2149920667443855532
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6045543604457452466}
+  serializedVersion: 4
+  m_Mass: 0.5
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 84
+  m_CollisionDetection: 0
+--- !u!114 &4258637557119525205
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -115,7 +157,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 6045543604457452466}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d7bb5f445d0ccf45b37d7c81ee151eb, type: 3}
+  m_Script: {fileID: 11500000, guid: eec9993649524254681ec2c6746824c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotation: 30
+  isMetallic: 1
+  isStatic: 0
+  magnetismWithoutUseForces: 0
+  magneticRigidbody: {fileID: 2149920667443855532}
+  AdvanceSettings: 0
+  turnOnMagnetism: 1
+  affectByMagnetism: 1
+  northPole: 1
+  constantMagneticForce: 1
+  magneticForce: 0
+  magneticDistance: 0
+  X_Axis: 0
+  Y_Axis: 1
+  Z_Axis: 0
+  allowTags: []
+  intermittentShutdown: 0
+  OffsetTime: 0
+  TimeOn: 0
+  TimeOff: 0
+  changePolarity: 0
+  timeToChange: 0

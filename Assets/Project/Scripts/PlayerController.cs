@@ -67,6 +67,8 @@ public class PlayerController : MonoBehaviour
 
             // Change #5: disable collider
             pickUp.gameObject.GetComponent<Collider>().enabled = false;
+            pickUp.gameObject.GetComponent<MagneticTool>().IsStatic = true;
+            Destroy(pickUp.gameObject.GetComponent<Rigidbody>());
 
             /* Source:
              * https://github.com/deviantdear/RollABall/blob/master/Assets/Scripts/PlayerController.cs#L74 */
