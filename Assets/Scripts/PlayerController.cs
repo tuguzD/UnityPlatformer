@@ -44,6 +44,7 @@ public class PlayerController : MonoBehaviour
     {
         var x = _inputRoll;
         // Change #3: set minimum speed if it's too low
+        // TODO: fix VERY ANNOYING jumps when attempting to slow down
         var z = _rigidbody.velocity.z < minimalSpeed ? minimalSpeed : _inputSpeed;
 
         // Change #4: disable input movement if not grounded
