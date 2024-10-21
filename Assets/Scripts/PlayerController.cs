@@ -1,6 +1,7 @@
 // Total changes: 5
 
 using BSGames.Modules.GroundCheck;
+using Ditzelgames;
 using Gaskellgames.CameraController; // TODO: move to "health" script
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -42,15 +43,15 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        var x = _inputRoll;
         // Change #3: set minimum speed if it's too low
-        // TODO: fix VERY ANNOYING jumps when attempting to slow down
-        var z = _rigidbody.velocity.z < minimalSpeed ? minimalSpeed : _inputSpeed;
+        if (_rigidbody.velocity.z < minimalSpeed)
+            PhysicsHelper.ApplyForceToReachVelocity(
+                _rigidbody, Vector3.forward * minimalSpeed, float.MaxValue);
 
         // Change #4: disable input movement if not grounded
-        if (!_groundCheck.IsGrounded()) x = z = 0.0f;
-
-        var movement = new Vector3(x, 0.0f, z);
+        var movement = _groundCheck.IsGrounded()
+            ? new Vector3(_inputRoll, 0.0f, _inputSpeed)
+            : new Vector3();
         _rigidbody.AddForce(movement * (acceleration + _size));
     }
 
