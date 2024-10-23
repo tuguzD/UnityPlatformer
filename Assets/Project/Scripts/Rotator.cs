@@ -26,7 +26,8 @@ public class Rotator : MonoBehaviour
         // Change #2: restructure code to avoid unnecessary processing
         if (!ball.gameObject.CompareTag("Player")) return;
         var scale = transform.localScale.magnitude;
-        var size = ball.gameObject.GetComponent<PlayerController>().size;
+        var size = ball.transform.parent
+            .gameObject.GetComponent<PlayerController>().size;
 
         if (scale > size.Amount) return;
         transform.parent = ball.transform;

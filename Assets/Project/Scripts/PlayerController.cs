@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
         // Change #1: set size to initial scale
         size.Amount = ball.transform.localScale.magnitude;
 
-        GetComponent<CameraShaker>().Activate(); // TODO: move to "health" script
+        ball.GetComponent<CameraShaker>().Activate(); // TODO: move to "health" script
     }
 
     private float _inputRoll;
