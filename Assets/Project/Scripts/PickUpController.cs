@@ -3,7 +3,7 @@
 using Ditzelgames;
 using UnityEngine;
 
-public class Rotator : MonoBehaviour
+public class PickUpController : MonoBehaviour
 {
     [Header("Physics")]
     public Rigidbody pickUp;
