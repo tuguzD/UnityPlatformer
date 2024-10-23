@@ -1096,8 +1096,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01b4baa9cb7d69b48be730a4dec5490e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minimalSpeed: 5
-  acceleration: 10
+  speedup: 10
+  velocity: {fileID: 8347954745949285567}
+  size: {fileID: 7958975127850460128}
+  ball: {fileID: 1333073185178226399}
+  groundChecker: {fileID: 2128082178890900813}
 --- !u!135 &3912986174282741121
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1339,9 +1342,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _units: M
-  _maximumAmount: 10
+  _maximumAmount: 50
   _minimumAmount: 0
-  _capacity: 10
+  _capacity: 50
   _currentAmount: 0
   _deltaAmount: 0
   _fillAmount: 0
