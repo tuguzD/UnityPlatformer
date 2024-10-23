@@ -53,16 +53,4 @@ public class PlayerController : MonoBehaviour
             : new Vector3(_inputRoll, 0.0f, _inputSpeed);
         ball.AddForce(movement * (speedup + size.Amount));
     }
-
-    /* Source of method:
-     * https://www.youtube.com/watch?v=StATWcqq4po&t=950s */
-    private void OnCollisionEnter(Collision pickUp)
-    {
-        var scale = pickUp.transform.localScale.magnitude;
-        if (pickUp.gameObject.CompareTag("PickUp") && scale <= size.Amount)
-        {
-            pickUp.transform.parent = transform;
-            size.Amount += scale;
-        }
-    }
 }
