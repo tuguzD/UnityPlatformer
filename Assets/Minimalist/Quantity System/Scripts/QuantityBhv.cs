@@ -202,6 +202,11 @@ namespace Minimalist.Quantity
                 StopCoroutine(_passiveDynamicsCoroutine);
             }
         }
+        
+        public void SetPassiveDynamicsType(QuantityDynamicsType type)
+        {
+            PassiveDynamics.Type = type;
+        }
 
         private IEnumerator PassiveDynamicsCoroutine()
         {

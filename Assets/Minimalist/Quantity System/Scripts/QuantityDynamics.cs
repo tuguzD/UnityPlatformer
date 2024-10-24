@@ -14,6 +14,10 @@ namespace Minimalist.Quantity
             {
                 return _type;
             }
+            set
+            {
+                _type = value;
+            }
         }
         public float DeltaPercentage
         {
