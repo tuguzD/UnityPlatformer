@@ -3,39 +3,25 @@
 using BSGames.Modules.GroundCheck;
 using Ditzelgames;
 using Gaskellgames.CameraController; // TODO: move to "health" script
-using Minimalist.Quantity;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 /* Source of class:
  * https://www.youtube.com/watch?v=FsYI9D3aukY&list=PLD8pFQ5A8vv6U4Sm0JKdcNGGOOZNoX2lv&index=2 */
 public class PlayerController : MonoBehaviour
 {
-    public float speedup = 10.0f;
-
-    [Header("Subjective Quantities")] // Example from PlayerBhv.cs
-    public QuantityBhv temperature;
-    public QuantityBhv durability;
-    public QuantityBhv velocity;
-    public QuantityBhv size;
-    
-    [Header("Objective Quantities")] // Example from PlayerBhv.cs
-    public QuantityBhv spikiness;
-    public QuantityBhv bounciness;
-    public QuantityBhv plasticity;
-    public QuantityBhv magnetisation;
-    
-    [Header("Pick-ups")]
-    public Transform pickUpParent;
+    public QuantityController quantities;
 
     [Header("Physics")] // Example from "Ground Checking Kit" asset docs
     public Rigidbody ball;
+    public float speedup = 10.0f;
     public GroundCheck groundChecker;
 
     private void Start()
     {
         // Change #1: set size to initial scale
-        size.Amount = ball.transform.localScale.magnitude;
+        quantities.size.Amount = ball.transform.localScale.magnitude;
 
         ball.GetComponent<CameraShaker>().Activate(); // TODO: move to "health" script
     }
@@ -53,15 +39,15 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         // Change #2: update velocity quantity
-        velocity.Amount = ball.velocity.z;
+        quantities.velocity.Amount = ball.velocity.z;
         
         // Change #3: set minimum speed if it's too low
-        if (ball.velocity.z < velocity.MinimumAmount) PhysicsHelper.ApplyForceToReachVelocity(
-            velocity: Vector3.forward * velocity.MinimumAmount, rigidbody: ball, force: float.MaxValue);
+        if (ball.velocity.z < quantities.velocity.MinimumAmount) PhysicsHelper.ApplyForceToReachVelocity(
+            velocity: Vector3.forward * quantities.velocity.MinimumAmount, rigidbody: ball, force: float.MaxValue);
 
         // Change #4: disable input movement if not grounded
         var movement = !groundChecker.IsGrounded() ? new Vector3()
             : new Vector3(_inputRoll, 0.0f, _inputSpeed);
-        ball.AddForce(movement * (speedup + size.Amount));
+        ball.AddForce(movement * (speedup + quantities.size.Amount));
     }
 }

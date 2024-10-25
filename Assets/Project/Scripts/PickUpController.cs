@@ -26,14 +26,14 @@ public class PickUpController : MonoBehaviour
         // Change #2: restructure code to avoid unnecessary processing
         if (!ball.gameObject.CompareTag("Player")) return;
         var scale = transform.localScale.magnitude;
-        var player = ball.transform.parent.gameObject.GetComponent<PlayerController>();
+        var quantities = ball.transform.parent.gameObject.GetComponent<QuantityController>();
 
-        if (scale > player.size.Amount) return;
-        transform.parent = player.pickUpParent;
-        player.size.Amount += scale;
+        if (scale > quantities.size.Amount) return;
+        transform.parent = quantities.pickUpParent;
+        quantities.size.Amount += scale;
         
         // Change #3: increase player ball spikiness
-        player.spikiness.MinimumAmount += 0.1f;
+        quantities.spikiness.MinimumAmount += 0.1f;
                 
         // Change #4: disable collider, magnetism and physics processing
         GetComponent<Collider>().enabled = false;

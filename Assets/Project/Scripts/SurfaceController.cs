@@ -10,7 +10,7 @@ public class SurfaceController : MonoBehaviour
     {
         if (!ball.gameObject.CompareTag("Player")) return;
         var temperature = ball.transform.parent
-            .gameObject.GetComponent<PlayerController>().temperature;
+            .gameObject.GetComponent<QuantityController>().temperature;
 
         if (dynamicsType.Equals(QuantityDynamicsType.None))
             temperature.PassiveDynamics.Type = Math.Round(temperature.Amount, 2) == 0 ? dynamicsType
@@ -21,7 +21,7 @@ public class SurfaceController : MonoBehaviour
     private void OnCollisionExit(Collision ball)
     {
         if (!ball.gameObject.CompareTag("Player")) return;
-        ball.transform.parent.gameObject.GetComponent<PlayerController>()
+        ball.transform.parent.gameObject.GetComponent<QuantityController>()
             .temperature.PassiveDynamics.Type = QuantityDynamicsType.None;
     }
 }

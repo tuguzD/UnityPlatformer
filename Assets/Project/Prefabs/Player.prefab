@@ -2643,6 +2643,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7562962934770653945}
+  - component: {fileID: 7139617762574630719}
   - component: {fileID: 7361398101346918023}
   - component: {fileID: 4999216293731134225}
   - component: {fileID: 4155343620771785462}
@@ -2671,6 +2672,27 @@ Transform:
   - {fileID: 7562962936408140822}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7139617762574630719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7562962934770653944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03831b13882c5a941bf346a85fb32e80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  temperature: {fileID: 2255508260088117699}
+  durability: {fileID: 5863240323320783474}
+  velocity: {fileID: 8347954745949285567}
+  size: {fileID: 7958975127850460128}
+  spikiness: {fileID: 5872763971647626118}
+  bounciness: {fileID: 785935242107428805}
+  plasticity: {fileID: 5162796955552803400}
+  magnetisation: {fileID: 1181984059698246943}
+  pickUpParent: {fileID: 7047501491585850929}
 --- !u!114 &7361398101346918023
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2716,17 +2738,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01b4baa9cb7d69b48be730a4dec5490e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedup: 10
-  temperature: {fileID: 2255508260088117699}
-  durability: {fileID: 5863240323320783474}
-  velocity: {fileID: 8347954745949285567}
-  size: {fileID: 7958975127850460128}
-  spikiness: {fileID: 5872763971647626118}
-  bounciness: {fileID: 785935242107428805}
-  plasticity: {fileID: 5162796955552803400}
-  magnetisation: {fileID: 1181984059698246943}
-  pickUpParent: {fileID: 7047501491585850929}
+  quantities: {fileID: 7139617762574630719}
   ball: {fileID: 1333073185178226399}
+  speedup: 10
   groundChecker: {fileID: 2128082178890900813}
 --- !u!114 &7409395575140995745
 MonoBehaviour:
