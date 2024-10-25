@@ -2,6 +2,7 @@ using System;
 using Minimalist.Quantity;
 using UnityEngine;
 
+// Completely new class, no source provided
 public class SurfaceController : MonoBehaviour
 {
     public QuantityDynamicsType dynamicsType;
