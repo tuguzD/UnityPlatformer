@@ -1700,7 +1700,7 @@ MonoBehaviour:
   _deltaAmount: 0
   _fillAmount: 0.5
   _passiveDynamics:
-    _type: 0
+    _type: 1
     _deltaAmountType: 0
     _deltaPercentage: 1
     _deltaAmount: 0.05
