@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     public float speedup = 10.0f;
 
     [Header("Quantities")] // Example from PlayerBhv.cs
+    public QuantityBhv temperature;
     public QuantityBhv velocity;
     public QuantityBhv size;
 
