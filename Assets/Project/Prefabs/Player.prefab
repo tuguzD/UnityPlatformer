@@ -1700,7 +1700,7 @@ MonoBehaviour:
   _deltaAmount: 0
   _fillAmount: 0.5
   _passiveDynamics:
-    _type: 1
+    _type: 0
     _deltaAmountType: 0
     _deltaPercentage: 1
     _deltaAmount: 0.05
@@ -2653,9 +2653,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speedup: 10
+  temperature: {fileID: 2255508260088117699}
   velocity: {fileID: 8347954745949285567}
   size: {fileID: 7958975127850460128}
-  temperature: {fileID: 2255508260088117699}
   ball: {fileID: 1333073185178226399}
   groundChecker: {fileID: 2128082178890900813}
 --- !u!114 &7409395575140995745
