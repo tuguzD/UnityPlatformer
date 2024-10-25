@@ -1,4 +1,4 @@
-// Total changes: 3
+// Total changes: 4
 
 using Ditzelgames;
 using UnityEngine;
@@ -31,8 +31,11 @@ public class PickUpController : MonoBehaviour
         if (scale > player.size.Amount) return;
         transform.parent = player.pickUpParent;
         player.size.Amount += scale;
+        
+        // Change #3: increase player ball spikiness
+        player.spikiness.MinimumAmount += 0.1f;
                 
-        // Change #3: disable collider, magnetism and physics processing
+        // Change #4: disable collider, magnetism and physics processing
         GetComponent<Collider>().enabled = false;
         GetComponent<MagneticTool>().IsStatic = true;
         Destroy(pickUp);

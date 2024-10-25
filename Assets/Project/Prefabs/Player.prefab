@@ -2718,8 +2718,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speedup: 10
   temperature: {fileID: 2255508260088117699}
+  durability: {fileID: 5863240323320783474}
   velocity: {fileID: 8347954745949285567}
   size: {fileID: 7958975127850460128}
+  spikiness: {fileID: 5872763971647626118}
+  bounciness: {fileID: 785935242107428805}
+  plasticity: {fileID: 5162796955552803400}
+  magnetisation: {fileID: 1181984059698246943}
   pickUpParent: {fileID: 7047501491585850929}
   ball: {fileID: 1333073185178226399}
   groundChecker: {fileID: 2128082178890900813}
