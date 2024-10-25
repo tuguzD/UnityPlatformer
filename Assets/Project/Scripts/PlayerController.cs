@@ -17,6 +17,9 @@ public class PlayerController : MonoBehaviour
     public QuantityBhv temperature;
     public QuantityBhv velocity;
     public QuantityBhv size;
+    
+    [Header("Pick-ups")]
+    public Transform pickUpParent;
 
     [Header("Physics")] // Example from "Ground Checking Kit" asset docs
     public Rigidbody ball;

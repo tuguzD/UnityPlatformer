@@ -26,12 +26,11 @@ public class PickUpController : MonoBehaviour
         // Change #2: restructure code to avoid unnecessary processing
         if (!ball.gameObject.CompareTag("Player")) return;
         var scale = transform.localScale.magnitude;
-        var size = ball.transform.parent
-            .gameObject.GetComponent<PlayerController>().size;
+        var player = ball.transform.parent.gameObject.GetComponent<PlayerController>();
 
-        if (scale > size.Amount) return;
-        transform.parent = ball.transform;
-        size.Amount += scale;
+        if (scale > player.size.Amount) return;
+        transform.parent = player.pickUpParent;
+        player.size.Amount += scale;
                 
         // Change #3: disable collider, magnetism and physics processing
         GetComponent<Collider>().enabled = false;
