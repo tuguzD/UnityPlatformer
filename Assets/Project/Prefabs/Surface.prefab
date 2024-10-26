@@ -115,6 +115,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75b87edf9cd304740adc9ef47f5adcfb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  frictionType: 0
+  temperatureType: 0
 --- !u!64 &5324761174048097912
 MeshCollider:
   m_ObjectHideFlags: 0
