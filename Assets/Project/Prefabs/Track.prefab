@@ -104,6 +104,11 @@ PrefabInstance:
       propertyPath: dynamicsType
       value: -1
       objectReference: {fileID: 0}
+    - target: {fileID: 4244093456371110967, guid: f0ad154101fddbb42bce08a04fc7a72f,
+        type: 3}
+      propertyPath: temperatureType
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 5324761174048097912, guid: f0ad154101fddbb42bce08a04fc7a72f,
         type: 3}
       propertyPath: m_Material
@@ -281,6 +286,11 @@ PrefabInstance:
     - target: {fileID: 4244093456371110967, guid: f0ad154101fddbb42bce08a04fc7a72f,
         type: 3}
       propertyPath: dynamicsType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4244093456371110967, guid: f0ad154101fddbb42bce08a04fc7a72f,
+        type: 3}
+      propertyPath: temperatureType
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5324761174048097912, guid: f0ad154101fddbb42bce08a04fc7a72f,
