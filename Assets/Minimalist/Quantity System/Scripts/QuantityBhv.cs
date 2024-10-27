@@ -208,6 +208,11 @@ namespace Minimalist.Quantity
             PassiveDynamics.Type = type;
         }
 
+        public void SetRealDeltaAmount(float deltaAmount)
+        {
+            PassiveDynamics.SignedDeltaAmount = deltaAmount;
+        }
+
         private IEnumerator PassiveDynamicsCoroutine()
         {
             while (Application.isPlaying)

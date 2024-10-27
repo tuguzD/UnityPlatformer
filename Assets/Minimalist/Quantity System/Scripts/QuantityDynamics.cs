@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 namespace Minimalist.Quantity
@@ -31,6 +30,10 @@ namespace Minimalist.Quantity
             get
             {
                 return _deltaAmount * (float)_type;
+            }
+            set
+            {
+                _deltaAmount = Math.Abs(value);
             }
         }
         public float DeltaTime
