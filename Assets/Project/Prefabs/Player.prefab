@@ -1164,6 +1164,7 @@ MonoBehaviour:
   AdvanceSettings: 0
   turnOnMagnetism: 1
   affectByMagnetism: 1
+  affectMultiplier: 1
   northPole: 0
   constantMagneticForce: 0
   magneticForce: 250
@@ -2708,10 +2709,12 @@ MonoBehaviour:
   _data:
     _json: '{"declarations":{"Kind":"Object","collection":{"$content":[{"name":"Quantities","value":{"$content":0,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"QuantityController,
       Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"Collider","value":{"$content":1,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"UnityEngine.SphereCollider,
-      UnityEngine.PhysicsModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"}],"$version":"A"},"$version":"A"}}'
+      UnityEngine.PhysicsModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"Magnetism","value":{"$content":2,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"MagneticTool,
+      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"}],"$version":"A"},"$version":"A"}}'
     _objectReferences:
     - {fileID: 7139617762574630719}
     - {fileID: 3912986174282741121}
+    - {fileID: 4902724099402172841}
 --- !u!114 &4999216293731134225
 MonoBehaviour:
   m_ObjectHideFlags: 0
