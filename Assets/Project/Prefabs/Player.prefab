@@ -2706,10 +2706,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _data:
-    _json: '{"declarations":{"Kind":"Object","collection":{"$content":[{"name":"Temperature","value":{"$content":0,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"Minimalist.Quantity.QuantityBhv,
+    _json: '{"declarations":{"Kind":"Object","collection":{"$content":[{"name":"Quantities","value":{"$content":0,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"QuantityController,
       Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"}],"$version":"A"},"$version":"A"}}'
     _objectReferences:
-    - {fileID: 2255508260088117699}
+    - {fileID: 7139617762574630719}
 --- !u!114 &4999216293731134225
 MonoBehaviour:
   m_ObjectHideFlags: 0
