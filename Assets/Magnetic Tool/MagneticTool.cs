@@ -61,6 +61,7 @@ public class MagneticTool : MonoBehaviour
     [Space]
     [SerializeField] private bool turnOnMagnetism = true;
     [SerializeField] private bool affectByMagnetism = true;
+    [SerializeField] private float affectMultiplier = 1.0f;
 
     [Header("Magnetic Options")]
     [SerializeField, DisableIf("isMetallic", true)] private bool northPole;
@@ -111,6 +112,7 @@ public class MagneticTool : MonoBehaviour
     public float MagneticDistance { get => magneticDistance; set => magneticDistance = value; }
     public bool TurnOnMagnetism { get => turnOnMagnetism; set => turnOnMagnetism = value; }
     public bool AffectByMagnetism { get => affectByMagnetism; set => affectByMagnetism = value; }
+    public float AffectMultiplier { get => affectMultiplier; set => affectMultiplier = value; }
     public bool XAxis { get => X_Axis; set => X_Axis = value; }
     public bool YAxis { get => Y_Axis; set => Y_Axis = value; }
     public bool ZAxis { get => Z_Axis; set => Z_Axis = value; }
@@ -218,6 +220,7 @@ public class MagneticTool : MonoBehaviour
                 Force = MAGNETIC_CONS * (magneticForce * mass) / (distance * distance);
             }
             else Force = MAGNETIC_CONS * magneticForce * mass;
+            Force *= magneticScript.affectMultiplier;
 
             Vector3 vectorDirection = transform.position - magneticObject.transform.position;
             Vector3 vectorDirectionNorm = vectorDirection.normalized;
@@ -275,6 +278,7 @@ public class MagneticTool : MonoBehaviour
             float Force = 0;
             //we calculate the force
             Force = MAGNETIC_CONS * (magneticForce * mass) / (distance * distance);
+            Force *= magneticScript.affectMultiplier;
 
             if (Force < 0.01)
             {
