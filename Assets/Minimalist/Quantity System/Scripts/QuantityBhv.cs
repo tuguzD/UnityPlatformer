@@ -182,10 +182,8 @@ namespace Minimalist.Quantity
 
         private void Start()
         {
-            if (Application.isPlaying && PassiveDynamics.Type != QuantityDynamicsType.None)
-            {
+            if (Application.isPlaying) 
                 StartPassiveDynamics();
-            }
         }
 
         public void StartPassiveDynamics()

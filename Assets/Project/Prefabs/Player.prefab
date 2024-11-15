@@ -188,7 +188,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Durability 1,00 H
+  m_text: Durability 0,50 H
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0754336532ddf914ba14a544744a1f57, type: 2}
   m_sharedMaterial: {fileID: -7044089276283464680, guid: 0754336532ddf914ba14a544744a1f57,
@@ -198,8 +198,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278255360
-  m_fontColor: {r: 0, g: 1, b: 0, a: 1}
+    rgba: 4278238463
+  m_fontColor: {r: 1, g: 0.73561454, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1731,7 +1731,7 @@ MonoBehaviour:
   _deltaAmount: 0
   _fillAmount: 0.5
   _passiveDynamics:
-    _type: 1
+    _type: 0
     _deltaAmountType: 0
     _deltaPercentage: 1
     _deltaAmount: 0.05
@@ -3115,11 +3115,11 @@ MonoBehaviour:
   _maximumAmount: 1
   _minimumAmount: 0
   _capacity: 1
-  _currentAmount: 1
-  _deltaAmount: 0
-  _fillAmount: 1
+  _currentAmount: 0.5
+  _deltaAmount: 0.048000008
+  _fillAmount: 0.5
   _passiveDynamics:
-    _type: -1
+    _type: 0
     _deltaAmountType: 0
     _deltaPercentage: 1
     _deltaAmount: 0.05
