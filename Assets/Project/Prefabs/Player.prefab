@@ -3122,7 +3122,7 @@ MonoBehaviour:
     _type: 0
     _deltaAmountType: 0
     _deltaPercentage: 1
-    _deltaAmount: 0.05
+    _deltaAmount: 0.025
     _deltaTime: 0.5
     _enabled: 1
   _onNameChanged:

@@ -5,7 +5,6 @@ using Ditzelgames;
 using Gaskellgames.CameraController; // TODO: move to "health" script
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
 
 /* Source of class:
  * https://www.youtube.com/watch?v=FsYI9D3aukY&list=PLD8pFQ5A8vv6U4Sm0JKdcNGGOOZNoX2lv&index=2 */
