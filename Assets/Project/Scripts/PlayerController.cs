@@ -1,8 +1,7 @@
-// Total changes: 4
+// Total changes: 3
 
 using BSGames.Modules.GroundCheck;
 using Ditzelgames;
-using Gaskellgames.CameraController; // TODO: move to "health" script
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -17,14 +16,6 @@ public class PlayerController : MonoBehaviour
     public float speedup = 10.0f;
     public GroundCheck groundChecker;
 
-    private void Start()
-    {
-        // Change #1: set size to initial scale
-        quantities.size.Amount = ball.transform.localScale.magnitude;
-
-        ball.GetComponent<CameraShaker>().Activate(); // TODO: move to "health" script
-    }
-
     private float _inputRoll;
     private float _inputSpeed;
 
@@ -37,14 +28,14 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        // Change #2: update velocity quantity
+        // Change #1: update velocity quantity
         quantities.velocity.Amount = ball.velocity.z;
         
-        // Change #3: set minimum speed if it's too low
+        // Change #2: set minimum speed if it's too low
         if (ball.velocity.z < quantities.velocity.MinimumAmount) PhysicsHelper.ApplyForceToReachVelocity(
             velocity: Vector3.forward * quantities.velocity.MinimumAmount, rigidbody: ball, force: float.MaxValue);
 
-        // Change #4: disable input movement if not grounded
+        // Change #3: disable input movement if not grounded
         var movement = !groundChecker.IsGrounded() ? new Vector3()
             : new Vector3(_inputRoll, 0.0f, _inputSpeed);
         ball.AddForce(movement * (speedup + quantities.size.Amount));
