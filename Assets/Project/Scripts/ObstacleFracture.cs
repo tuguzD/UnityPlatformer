@@ -1,10 +1,9 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Fracture))]
-public class CauseFracture : MonoBehaviour
+public class ObstacleFracture : MonoBehaviour
 {
-    [Tooltip("Minimum contact collision force required to cause the object to fracture.")]
-    public float minimumCollisionForce = 500f;
+    public float durability = 20f;
 
     private Fracture _fracture;
 
@@ -16,7 +15,7 @@ public class CauseFracture : MonoBehaviour
     private void OnCollisionEnter(Collision ball)
     {
         if (!ball.gameObject.CompareTag("Player")) return;
-        if (CollisionForce(ball) > minimumCollisionForce)
+        if (CollisionForce(ball) > durability)
             _fracture.CauseFracture();
     }
 
@@ -24,15 +23,15 @@ public class CauseFracture : MonoBehaviour
     {
         var quantities = ball.gameObject.transform.parent.GetComponent<QuantityController>();
 
-        var collisionForce = ball.impulse.magnitude / Time.fixedDeltaTime;
-        var spikinessMultiplier = 1 + quantities.spikiness.Amount;
+        var velocity = quantities.velocity.Amount;
+        var spikiness = 1 + quantities.spikiness.Amount;
 
         var x = quantities.plasticity.Amount;
         // how well energy is transferred to the object - the closer it is to average, the better
-        var plasticityMultiplier = 0.5f + (x < 0.5 ? 2*x : 2*(1 - x));
+        var plasticity = 0.5f + (x < 0.5 ? 2*x : 2*(1 - x));
 
-        var result = collisionForce * spikinessMultiplier * plasticityMultiplier;
-        Debug.Log($"{collisionForce} * {spikinessMultiplier} * {plasticityMultiplier} = {result}");
+        var result = velocity * spikiness * plasticity;
+        Debug.Log($"{velocity} * {spikiness} * {plasticity} = {result}");
         return result;
     }
 }
