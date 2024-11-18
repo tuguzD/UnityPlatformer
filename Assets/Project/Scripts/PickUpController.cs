@@ -29,8 +29,6 @@ public class PickUpController : MonoBehaviour
 
         if (this.Magnitude() > quantities.size.Amount) return;
         transform.parent = quantities.pickUpParent;
-        // Change #3: increase player ball pieces counter
-        quantities.pieces.Amount++;
 
         // Change #4: disable collider, magnetism and physics processing
         GetComponent<Collider>().enabled = false;

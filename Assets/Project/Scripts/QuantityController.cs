@@ -31,6 +31,7 @@ public class QuantityController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        pieces.Amount = pickUpParent.childCount;
         size.Amount = _playerController.ball.Magnitude() + pickUpParent
             .GetComponentsInChildren<PickUpController>().Sum(Utils.Magnitude);
 
