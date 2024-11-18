@@ -25,10 +25,9 @@ public class PickUpController : MonoBehaviour
     {
         // Change #2: restructure code to avoid unnecessary processing
         if (!ball.gameObject.CompareTag("Player")) return;
-        var scale = transform.localScale.magnitude;
         var quantities = ball.transform.parent.gameObject.GetComponent<QuantityController>();
 
-        if (scale > quantities.size.Amount) return;
+        if (this.Magnitude() > quantities.size.Amount) return;
         transform.parent = quantities.pickUpParent;
         // Change #3: increase player ball pieces counter
         quantities.pieces.Amount++;
