@@ -2,7 +2,6 @@ using System.Linq;
 using Gaskellgames.CameraController;
 using Minimalist.Quantity;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class QuantityController : MonoBehaviour
 {
@@ -17,17 +16,13 @@ public class QuantityController : MonoBehaviour
 
     [Header("Objective Quantities")] // Example from PlayerBhv.cs
     public QuantityBhv spikiness;
-    public float pieceToSpikinessMultiplier = 0.1f;
     public QuantityBhv plasticity;
     public QuantityBhv magnetisation;
 
     [Header("Pick-ups")]
     public Transform pickUpParent;
-    public Transform spikes;
 
     private PlayerController _playerController;
-    private const float SpikeScaleMin = 295;
-    private const float SpikeScaleMax = 385;
     private bool _fractured;
 
     private void Start()
@@ -37,17 +32,11 @@ public class QuantityController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        velocity.Amount = _playerController.ball.velocity.z;
+
         pieces.Amount = pickUpParent.childCount;
         size.Amount = _playerController.ball.Magnitude() + pickUpParent
             .GetComponentsInChildren<PickUpController>().Sum(Utils.Magnitude);
-
-        velocity.Amount = _playerController.ball.velocity.z;
-
-        spikiness.MinimumAmount = pieces.Amount * pieceToSpikinessMultiplier;
-        spikiness.MaximumAmount = 1 + spikiness.MinimumAmount;
-        
-        var value = SpikeScaleMin + spikiness.FillAmount * (SpikeScaleMax - SpikeScaleMin);
-        spikes.localScale = new Vector3(value, value, value);
     }
 
     private void Update()
