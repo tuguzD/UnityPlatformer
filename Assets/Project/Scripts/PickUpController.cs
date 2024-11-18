@@ -30,8 +30,6 @@ public class PickUpController : MonoBehaviour
 
         if (scale > quantities.size.Amount) return;
         transform.parent = quantities.pickUpParent;
-        quantities.size.Amount += scale;
-
         // Change #3: increase player ball pieces counter
         quantities.pieces.Amount++;
 

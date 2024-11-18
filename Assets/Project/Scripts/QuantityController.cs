@@ -1,3 +1,4 @@
+using System.Linq;
 using Gaskellgames.CameraController;
 using Minimalist.Quantity;
 using UnityEngine;
@@ -26,13 +27,15 @@ public class QuantityController : MonoBehaviour
     private void Start()
     {
         _playerController = GetComponent<PlayerController>();
-        size.Amount = _playerController.ball.transform.localScale.magnitude;
     }
 
     private void FixedUpdate()
     {
+        size.Amount = _playerController.ball.transform.localScale.magnitude + pickUpParent
+            .GetComponentsInChildren<PickUpController>().Sum(pickUp => pickUp.transform.localScale.magnitude);
+
         velocity.Amount = _playerController.ball.velocity.z;
-        
+
         spikiness.MinimumAmount = 0.1f * pieces.Amount;
         spikiness.MaximumAmount = 1 + spikiness.MinimumAmount;
     }
