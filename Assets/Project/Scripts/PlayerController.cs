@@ -1,4 +1,4 @@
-// Total changes: 3
+// Total changes: 2
 
 using BSGames.Modules.GroundCheck;
 using Ditzelgames;
@@ -28,16 +28,14 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        // Change #1: update velocity quantity
-        quantities.velocity.Amount = ball.velocity.z;
-        
-        // Change #2: set minimum speed if it's too low
+        // Change #1: set minimum speed if it's too low
         if (ball.velocity.z < quantities.velocity.MinimumAmount) PhysicsHelper.ApplyForceToReachVelocity(
             velocity: Vector3.forward * quantities.velocity.MinimumAmount, rigidbody: ball, force: float.MaxValue);
 
-        // Change #3: disable input movement if not grounded
+        // Change #2: disable input movement if not grounded
         var movement = !groundChecker.IsGrounded() ? new Vector3()
             : new Vector3(_inputRoll, 0.0f, _inputSpeed);
+
         ball.AddForce(movement * (speedup + quantities.size.Amount));
     }
 }

@@ -32,9 +32,8 @@ public class PickUpController : MonoBehaviour
         transform.parent = quantities.pickUpParent;
         quantities.size.Amount += scale;
 
-        // Change #3: increase player ball spikiness
-        quantities.spikiness.MinimumAmount += 0.1f;
-        quantities.spikiness.MaximumAmount += 0.1f;
+        // Change #3: increase player ball pieces counter
+        quantities.pieces.Amount++;
 
         // Change #4: disable collider, magnetism and physics processing
         GetComponent<Collider>().enabled = false;
