@@ -52,11 +52,11 @@ MonoBehaviour:
   _deltaAmount: 0
   _fillAmount: 0
   _passiveDynamics:
-    _type: 0
+    _type: 1
     _deltaAmountType: 0
     _deltaPercentage: 1
-    _deltaAmount: 0.05
-    _deltaTime: 0.5
+    _deltaAmount: 0.0025
+    _deltaTime: 0.05
     _enabled: 1
   _onNameChanged:
     m_PersistentCalls:
@@ -1116,9 +1116,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _units: N
-  _maximumAmount: 10
+  _maximumAmount: 100
   _minimumAmount: 0
-  _capacity: 10
+  _capacity: 100
   _currentAmount: 0
   _deltaAmount: 0
   _fillAmount: 0
@@ -1968,7 +1968,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Pieces 0/10 N
+  m_text: Pieces 0 N
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0754336532ddf914ba14a544744a1f57, type: 2}
   m_sharedMaterial: {fileID: -7044089276283464680, guid: 0754336532ddf914ba14a544744a1f57,
@@ -2085,7 +2085,7 @@ MonoBehaviour:
   _amountFormat: 0
   _displayQuantityName: 1
   _displayQuantityAmount: 1
-  _displayQuantityMaximum: 1
+  _displayQuantityMaximum: 0
   _displayQuantityUnits: 1
 --- !u!1 &6070845749020822789
 GameObject:
@@ -2733,9 +2733,11 @@ MonoBehaviour:
   velocity: {fileID: 8347954745949285567}
   size: {fileID: 7958975127850460128}
   spikiness: {fileID: 5872763971647626118}
+  pieceToSpikinessMultiplier: 0.1
   plasticity: {fileID: 5162796955552803400}
   magnetisation: {fileID: 1181984059698246943}
   pickUpParent: {fileID: 7047501491585850929}
+  spikes: {fileID: 2830033955858838187}
 --- !u!114 &7361398101346918023
 MonoBehaviour:
   m_ObjectHideFlags: 0
