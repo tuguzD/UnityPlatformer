@@ -11,7 +11,7 @@ public class SpikinessController : MonoBehaviour
 
     private void Start()
     {
-        _quantities = transform.parent.parent.GetComponent<QuantityController>();
+        _quantities = GetComponentInParent<QuantityController>();
     }
 
     private void FixedUpdate()

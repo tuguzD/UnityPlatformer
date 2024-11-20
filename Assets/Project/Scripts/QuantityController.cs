@@ -47,7 +47,8 @@ public class QuantityController : MonoBehaviour
 
     public void ProcessPickUp(PickUpController controller)
     {
-        spikiness.Amount += pickUpParent.GetComponent<SpikinessController>().pieceToSpikinessMultiplier;
+        spikiness.Amount += _playerController.GetComponentInChildren
+            <SpikinessController>().pieceToSpikinessMultiplier;
 
         Destroy(controller.pickUp);
         controller.gameObject.GetComponent<Collider>().enabled = false;

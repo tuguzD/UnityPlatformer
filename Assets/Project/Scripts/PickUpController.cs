@@ -25,7 +25,7 @@ public class PickUpController : MonoBehaviour
     {
         // Change #2: restructure code to avoid unnecessary processing
         if (!ball.gameObject.CompareTag("Player")) return;
-        var quantities = ball.transform.parent.gameObject.GetComponent<QuantityController>();
+        var quantities = ball.gameObject.GetComponentInParent<QuantityController>();
 
         if (this.Magnitude() > quantities.size.Amount) return;
         transform.parent = quantities.pickUpParent;

@@ -21,7 +21,7 @@ public class ObstacleFracture : MonoBehaviour
 
     private static float CollisionForce(Collision ball)
     {
-        var quantities = ball.gameObject.transform.parent.GetComponent<QuantityController>();
+        var quantities = ball.gameObject.GetComponentInParent<QuantityController>();
 
         var mass = quantities.size.Amount;
         var velocity = quantities.velocity.Amount;
