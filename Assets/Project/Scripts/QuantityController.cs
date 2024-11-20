@@ -23,7 +23,7 @@ public class QuantityController : MonoBehaviour
     public Transform pickUpParent;
 
     private PlayerController _playerController;
-    private bool _fractured;
+    [HideInInspector] public bool fractured;
 
     private void Start()
     {
@@ -41,7 +41,7 @@ public class QuantityController : MonoBehaviour
 
     private void Update()
     {
-        if (!_fractured && Mathf.Approximately(durability.FillAmount, Mathf.Epsilon))
+        if (!fractured && Mathf.Approximately(durability.FillAmount, Mathf.Epsilon))
             GameOver();
     }
 
@@ -55,11 +55,11 @@ public class QuantityController : MonoBehaviour
         controller.gameObject.GetComponent<MagneticTool>().IsStatic = true;
     }
 
-    private void GameOver()
+    public void GameOver()
     {
         _playerController.ball.GetComponent<CameraShaker>().Activate();
         _playerController.ball.GetComponent<Fracture>().CauseFracture();
-        _fractured = true;
+        fractured = true;
 
         _playerController.enabled = false;
     }
