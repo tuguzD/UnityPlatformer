@@ -45,6 +45,15 @@ public class QuantityController : MonoBehaviour
             GameOver();
     }
 
+    public void ProcessPickUp(PickUpController controller)
+    {
+        spikiness.Amount += pickUpParent.GetComponent<SpikinessController>().pieceToSpikinessMultiplier;
+
+        Destroy(controller.pickUp);
+        controller.gameObject.GetComponent<Collider>().enabled = false;
+        controller.gameObject.GetComponent<MagneticTool>().IsStatic = true;
+    }
+
     private void GameOver()
     {
         _playerController.ball.GetComponent<CameraShaker>().Activate();

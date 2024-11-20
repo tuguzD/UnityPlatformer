@@ -1,4 +1,4 @@
-// Total changes: 4
+// Total changes: 3
 
 using Ditzelgames;
 using UnityEngine;
@@ -29,13 +29,7 @@ public class PickUpController : MonoBehaviour
 
         if (this.Magnitude() > quantities.size.Amount) return;
         transform.parent = quantities.pickUpParent;
-        // Change #3: increase ball spikiness instead of size
-        quantities.spikiness.Amount += quantities.pickUpParent
-            .GetComponent<SpikinessController>().pieceToSpikinessMultiplier;
-
-        // Change #4: disable collider, magnetism and physics processing
-        GetComponent<Collider>().enabled = false;
-        GetComponent<MagneticTool>().IsStatic = true;
-        Destroy(pickUp);
+        // Change #3: move processing code to other class instead of increasing size
+        quantities.ProcessPickUp(this);
     }
 }
