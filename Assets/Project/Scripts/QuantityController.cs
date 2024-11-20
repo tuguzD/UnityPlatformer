@@ -1,6 +1,6 @@
-using System.Linq;
 using Gaskellgames.CameraController;
 using Minimalist.Quantity;
+using System.Linq;
 using UnityEngine;
 
 public class QuantityController : MonoBehaviour
