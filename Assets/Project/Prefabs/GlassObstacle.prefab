@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ae4f63b77334e1fa57b7254a8778df4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  durability: 20
+  durability: 30
 --- !u!114 &6569699128772811410
 MonoBehaviour:
   m_ObjectHideFlags: 0
