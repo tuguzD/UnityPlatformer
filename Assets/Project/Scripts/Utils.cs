@@ -10,4 +10,9 @@ public static class Utils
         // Debug.Log(result);
         return result;
     }
+
+    public static void UniformScale(this Component component, float value)
+    {
+        component.transform.localScale = new Vector3(value, value, value);
+    }
 }

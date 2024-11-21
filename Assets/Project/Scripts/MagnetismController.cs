@@ -3,12 +3,12 @@ using UnityEngine;
 public class MagnetismController : MonoBehaviour
 {
     private QuantityController _quantities;
-    
-    private const float FieldOpacityMin = .0f;
-    private const float FieldOpacityMax = .2f;
-    
-    private const float FieldScaleMin = 0f;
-    private const float FieldScaleMax = 2f;
+
+    private readonly MinMaxPair
+        _fieldOpacity = new(min: .0f, max: .15f);
+
+    private readonly MinMaxPair
+        _fieldScale = new(min: 0f, max: 2f);
 
     private void Start()
     {
@@ -18,12 +18,9 @@ public class MagnetismController : MonoBehaviour
     private void FixedUpdate()
     {
         var magnetisation = _quantities.magnetisation.FillAmount;
-        
-        var value = FieldOpacityMin + magnetisation * (FieldOpacityMax - FieldOpacityMin);
-        SetOpacity(value);
 
-        value = FieldScaleMin + magnetisation * (FieldScaleMax - FieldScaleMin);
-        transform.localScale = new Vector3(value, value, value);
+        SetOpacity(_fieldOpacity.Scaled(magnetisation));
+        this.UniformScale(_fieldScale.Scaled(magnetisation));
     }
 
     private void SetOpacity(float opacity)
