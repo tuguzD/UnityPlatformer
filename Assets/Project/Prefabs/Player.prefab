@@ -1226,6 +1226,7 @@ GameObject:
   - component: {fileID: 1333073185178226399}
   - component: {fileID: 281127601418312251}
   - component: {fileID: 3639536930002975250}
+  - component: {fileID: 7833006461627595125}
   m_Layer: 0
   m_Name: Ball
   m_TagString: Player
@@ -1455,6 +1456,18 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &7833006461627595125
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3304751284562327703}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 063a04767e3a46bba40ae3c9a201a086, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3789033811130807208
 GameObject:
   m_ObjectHideFlags: 0
@@ -2781,6 +2794,7 @@ MonoBehaviour:
   plasticity: {fileID: 5162796955552803400}
   magnetisation: {fileID: 1181984059698246943}
   pickUpParent: {fileID: 5903258022085961329}
+  fractured: 0
 --- !u!114 &7361398101346918023
 MonoBehaviour:
   m_ObjectHideFlags: 0
