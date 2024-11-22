@@ -13,7 +13,9 @@ public class DurabilityController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("PickUp")) return;
+        if (collision.gameObject.CompareTag("PickUp")
+            || (collision.gameObject.CompareTag("Break") && !collision.gameObject.GetComponent<Fracture>())
+        ) return;
 
         var relativeVelocity = Vector3.Scale(collision.relativeVelocity, collision.contacts[0].normal);
         // combine both height (y) and forward speed (z)
@@ -31,7 +33,7 @@ public class DurabilityController : MonoBehaviour
         var mass = threshold * _quantities.size.Amount;
         // max plasticity equals min brittleness, and vice versa
         var brittleness = 1 - _quantities.plasticity.Amount;
-        
+
         var result = velocity * brittleness / mass;
         return result;
     }
