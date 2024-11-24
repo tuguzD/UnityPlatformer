@@ -10,7 +10,7 @@ public class TemperatureController : MonoBehaviour
     private readonly MinMaxPair
         _glowPower = new(min: 0f, max: 0.2f);
 
-    [SerializeField] private Transform ballSpike;
+    [SerializeField] private MeshRenderer ballSpike;
 
     private Material _hotGlowSpikes;
     private Material _hotGlowBall;
@@ -20,8 +20,9 @@ public class TemperatureController : MonoBehaviour
     {
         _quantities = GetComponentInParent<QuantityController>();
 
-        _hotGlowSpikes = ballSpike.GetComponent<MeshRenderer>().materials[1];
-        _hotGlowBall = ballSpike.parent.GetComponent<MeshRenderer>().materials[2];
+        _hotGlowSpikes = ballSpike.materials[1];
+        _hotGlowBall = ballSpike.transform.parent
+            .GetComponent<MeshRenderer>().materials[2];
 
         _emissionColor = _hotGlowBall.GetColor(EmissionID) / 5f;
     }

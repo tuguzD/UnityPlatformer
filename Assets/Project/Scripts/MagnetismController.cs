@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class MagnetismController : MonoBehaviour
 {
+    [SerializeField] private MeshRenderer forceField;
+
     private QuantityController _quantities;
 
     private readonly MinMaxPair
@@ -19,8 +21,8 @@ public class MagnetismController : MonoBehaviour
     {
         var magnetisation = _quantities.magnetisation.FillAmount;
 
-        foreach (var material in GetComponent<MeshRenderer>().materials)
+        foreach (var material in forceField.materials)
             material.SetOpacity(_fieldOpacity.Scaled(magnetisation));
-        this.UniformScale(_fieldScale.Scaled(magnetisation));
+        forceField.UniformScale(_fieldScale.Scaled(magnetisation));
     }
 }
