@@ -15,4 +15,11 @@ public static class Utils
     {
         component.transform.localScale = new Vector3(value, value, value);
     }
+
+    public static void SetOpacity(this Material material, float opacity)
+    {
+        material.color = new Color(
+            material.color.r, material.color.g, material.color.b, opacity
+        );
+    }
 }

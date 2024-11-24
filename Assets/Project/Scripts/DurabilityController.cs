@@ -5,10 +5,18 @@ public class DurabilityController : MonoBehaviour
     public float threshold = 10;
 
     private QuantityController _quantities;
+    private Material _damageMaterial;
 
     private void Start()
     {
         _quantities = GetComponentInParent<QuantityController>();
+        _damageMaterial = GetComponent<MeshRenderer>().materials[1];
+    }
+
+    private void FixedUpdate()
+    {
+        _damageMaterial.SetOpacity(
+            1 - _quantities.durability.FillAmount);
     }
 
     private void OnCollisionEnter(Collision collision)

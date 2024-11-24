@@ -19,15 +19,8 @@ public class MagnetismController : MonoBehaviour
     {
         var magnetisation = _quantities.magnetisation.FillAmount;
 
-        SetOpacity(_fieldOpacity.Scaled(magnetisation));
-        this.UniformScale(_fieldScale.Scaled(magnetisation));
-    }
-
-    private void SetOpacity(float opacity)
-    {
         foreach (var material in GetComponent<MeshRenderer>().materials)
-            material.color = new Color(
-                material.color.r, material.color.g, material.color.b, opacity
-            );
+            material.SetOpacity(_fieldOpacity.Scaled(magnetisation));
+        this.UniformScale(_fieldScale.Scaled(magnetisation));
     }
 }
