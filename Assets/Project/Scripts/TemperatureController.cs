@@ -10,15 +10,20 @@ public class TemperatureController : MonoBehaviour
     private readonly MinMaxPair
         _glowPower = new(min: 0f, max: 0.2f);
 
-    private Material _hotGlow;
+    [SerializeField] private Transform ballSpike;
+
+    private Material _hotGlowSpikes;
+    private Material _hotGlowBall;
     private Color _emissionColor;
 
     private void Start()
     {
         _quantities = GetComponentInParent<QuantityController>();
 
-        _hotGlow = GetComponent<MeshRenderer>().materials[2];
-        _emissionColor = _hotGlow.GetColor(EmissionID) / 5f;
+        _hotGlowSpikes = ballSpike.GetComponent<MeshRenderer>().materials[1];
+        _hotGlowBall = ballSpike.parent.GetComponent<MeshRenderer>().materials[2];
+
+        _emissionColor = _hotGlowBall.GetColor(EmissionID) / 5f;
     }
 
     private void FixedUpdate()
@@ -27,11 +32,13 @@ public class TemperatureController : MonoBehaviour
         if (temperature > 0)
         {
             var color = _glowPower.Scaled(temperature) * _emissionColor;
-            _hotGlow.SetColor(EmissionID, color);
+            _hotGlowBall.SetColor(EmissionID, color);
+            _hotGlowSpikes.SetColor(EmissionID, color);
         }
         else
         {
-            _hotGlow.SetColor(EmissionID, 0f * _emissionColor);
+            _hotGlowBall.SetColor(EmissionID, 0f * _emissionColor);
+            _hotGlowSpikes.SetColor(EmissionID, 0f * _emissionColor);
         }
     }
 }

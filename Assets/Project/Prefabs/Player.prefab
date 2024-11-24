@@ -1582,6 +1582,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5793ae5221b44198d5d961dfc25ab70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ballSpike: {fileID: 2830033955858838187}
 --- !u!1 &3789033811130807208
 GameObject:
   m_ObjectHideFlags: 0
@@ -3449,9 +3450,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: df52556f0b0a63c4ebae12a6553c0b7d,
         type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: df52556f0b0a63c4ebae12a6553c0b7d,
+        type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 40ede19d606844c4f8d2a7b29ffefae5, type: 2}
+    - target: {fileID: -7511558181221131132, guid: df52556f0b0a63c4ebae12a6553c0b7d,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5d3a26c71833d49428aabce667584ee3, type: 2}
     - target: {fileID: 919132149155446097, guid: df52556f0b0a63c4ebae12a6553c0b7d,
         type: 3}
       propertyPath: m_Name
