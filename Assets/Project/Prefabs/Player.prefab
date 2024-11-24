@@ -2945,7 +2945,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   quantities: {fileID: 7139617762574630719}
   ball: {fileID: 1333073185178226399}
-  speedup: 10
+  speedup: 7.5
   groundChecker: {fileID: 2128082178890900813}
 --- !u!114 &7409395575140995745
 MonoBehaviour:

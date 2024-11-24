@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Physics")] // Example from "Ground Checking Kit" asset docs
     public Rigidbody ball;
-    public float speedup = 10.0f;
+    public float speedup = 7.5f;
     public GroundCheck groundChecker;
 
     private float _inputRoll;
@@ -36,6 +36,6 @@ public class PlayerController : MonoBehaviour
         var movement = !groundChecker.IsGrounded() ? new Vector3()
             : new Vector3(_inputRoll, 0.0f, _inputSpeed);
 
-        ball.AddForce(movement * (speedup + quantities.size.Amount));
+        ball.AddForce(movement * (speedup * quantities.size.Amount));
     }
 }
