@@ -7,10 +7,16 @@ public class TemperatureController : MonoBehaviour
 
     private QuantityController _quantities;
 
-    private readonly MinMaxPair
-        _glowPower = new(min: 0f, max: 0.2f);
-
     [SerializeField] private MeshRenderer ballSpike;
+
+    [Header("Ice Coverage")] private readonly MinMaxPair
+        _iceCoverage = new(min: 0f, max: 0.3f);
+
+    private Material _iceCoverSpikes;
+    private Material _iceCoverBall;
+
+    [Header("Hot Glowing")] private readonly MinMaxPair
+        _glowPower = new(min: 0f, max: 0.2f);
 
     private Material _hotGlowSpikes;
     private Material _hotGlowBall;
@@ -20,26 +26,34 @@ public class TemperatureController : MonoBehaviour
     {
         _quantities = GetComponentInParent<QuantityController>();
 
-        _hotGlowSpikes = ballSpike.materials[1];
+        _iceCoverSpikes = ballSpike.materials[1];
+        _iceCoverBall = ballSpike.transform.parent
+            .GetComponent<MeshRenderer>().materials[1];
+
+        _hotGlowSpikes = ballSpike.materials[2];
         _hotGlowBall = ballSpike.transform.parent
-            .GetComponent<MeshRenderer>().materials[2];
+            .GetComponent<MeshRenderer>().materials[3];
 
         _emissionColor = _hotGlowBall.GetColor(EmissionID) / 5f;
     }
 
     private void FixedUpdate()
     {
+        var hotColor = _emissionColor;
+        var iceOpacity = 0f;
+
         var temperature = _quantities.temperature.Amount;
-        if (temperature > 0)
+        if (temperature < 0)
         {
-            var color = _glowPower.Scaled(temperature) * _emissionColor;
-            _hotGlowBall.SetColor(EmissionID, color);
-            _hotGlowSpikes.SetColor(EmissionID, color);
+            hotColor *= 0f;
+            iceOpacity = _iceCoverage.Scaled(-1 * temperature);
         }
-        else
-        {
-            _hotGlowBall.SetColor(EmissionID, 0f * _emissionColor);
-            _hotGlowSpikes.SetColor(EmissionID, 0f * _emissionColor);
-        }
+        else hotColor *= _glowPower.Scaled(temperature);
+
+        _iceCoverBall.SetOpacity(iceOpacity);
+        _iceCoverSpikes.SetOpacity(iceOpacity);
+
+        _hotGlowBall.SetColor(EmissionID, hotColor);
+        _hotGlowSpikes.SetColor(EmissionID, hotColor);
     }
 }

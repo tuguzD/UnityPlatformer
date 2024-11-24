@@ -10,7 +10,7 @@ public class DurabilityController : MonoBehaviour
     private void Start()
     {
         _quantities = GetComponentInParent<QuantityController>();
-        _damageMaterial = GetComponent<MeshRenderer>().materials[1];
+        _damageMaterial = GetComponent<MeshRenderer>().materials[2];
     }
 
     private void FixedUpdate()
