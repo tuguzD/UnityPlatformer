@@ -1324,6 +1324,7 @@ GameObject:
   - component: {fileID: 281127601418312251}
   - component: {fileID: 3639536930002975250}
   - component: {fileID: 7833006461627595125}
+  - component: {fileID: 4344772424458754313}
   m_Layer: 0
   m_Name: Ball
   m_TagString: Player
@@ -1534,6 +1535,7 @@ MeshRenderer:
   m_Materials:
   - {fileID: 2100000, guid: 40ede19d606844c4f8d2a7b29ffefae5, type: 2}
   - {fileID: 2100000, guid: 3e12139150968634b856cca50941b3e0, type: 2}
+  - {fileID: 2100000, guid: 5d3a26c71833d49428aabce667584ee3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1568,6 +1570,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   threshold: 10
+--- !u!114 &4344772424458754313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3304751284562327703}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5793ae5221b44198d5d961dfc25ab70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3789033811130807208
 GameObject:
   m_ObjectHideFlags: 0
