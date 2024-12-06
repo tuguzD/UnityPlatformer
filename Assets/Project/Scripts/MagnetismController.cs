@@ -7,7 +7,7 @@ public class MagnetismController : MonoBehaviour
     private QuantityController _quantities;
 
     private readonly MinMaxPair
-        _fieldOpacity = new(min: .0f, max: .1f);
+        _fieldOpacity = new(min: .0f, max: .05f);
 
     private readonly MinMaxPair
         _fieldScale = new(min: 0f, max: 2f);
