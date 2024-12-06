@@ -1,6 +1,8 @@
+using System.Collections;
 using Gaskellgames.CameraController;
 using Minimalist.Quantity;
 using System.Linq;
+using SmartPoint;
 using UnityEngine;
 
 public class QuantityController : MonoBehaviour
@@ -25,9 +27,12 @@ public class QuantityController : MonoBehaviour
     private PlayerController _playerController;
     [HideInInspector] public bool fractured;
 
+    private CheckPointController _checkPointController;
+
     private void Start()
     {
         _playerController = GetComponent<PlayerController>();
+        _checkPointController = FindObjectOfType<CheckPointController>();
     }
 
     private void FixedUpdate()
@@ -55,12 +60,28 @@ public class QuantityController : MonoBehaviour
         controller.gameObject.GetComponent<MagneticTool>().IsStatic = true;
     }
 
+    // ReSharper disable once MemberCanBePrivate.Global
     public void GameOver()
     {
         _playerController.ball.GetComponent<CameraShaker>().Activate();
         _playerController.ball.GetComponent<Fracture>().CauseFracture();
-        fractured = true;
 
+        fractured = true;
         _playerController.enabled = false;
+        StartCoroutine(Respawn());
+    }
+    
+    private IEnumerator Respawn(float seconds = 3)
+    {
+        yield return new WaitForSeconds(seconds);
+
+        _checkPointController.TeleportToRecentlyActivated(
+            _playerController.ball.gameObject);
+
+        // TODO: fracture not the player ball, but it's copy
+        // fractured = false;
+        // _playerController.enabled = true;
+        
+        // TODO: reset all quantities and state machines
     }
 }
