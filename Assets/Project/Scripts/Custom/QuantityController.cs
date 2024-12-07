@@ -38,10 +38,10 @@ public class QuantityController : MonoBehaviour
     private void FixedUpdate()
     {
         velocity.Amount = _playerController.ball.velocity.z;
-
         pieces.Amount = pickUpParent.childCount;
-        size.Amount = _playerController.ball.Magnitude() + pickUpParent
-            .GetComponentsInChildren<PickUpController>().Sum(Utils.Magnitude);
+
+        size.Amount = _playerController.ball.MeshSize() * _playerController.ball.Scale()
+            + pickUpParent.GetComponentsInChildren<PickUpController>().Sum(Utils.MeshSize);
     }
 
     private void Update()

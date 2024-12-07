@@ -2,12 +2,18 @@ using UnityEngine;
 
 public static class Utils
 {
-    public static float Magnitude(this Component component)
+    public static float MeshSize(this Component component)
     {
         var result = component.gameObject.GetComponent<MeshFilter>()
             .sharedMesh.bounds.size.magnitude;
+        return result;
+    }
 
-        // Debug.Log(result);
+    public static float Scale(this Component component, bool uniform = true)
+    {
+        var result = uniform
+            ? component.gameObject.transform.lossyScale.x
+            : component.gameObject.transform.lossyScale.magnitude;
         return result;
     }
 
