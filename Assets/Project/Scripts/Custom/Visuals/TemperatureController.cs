@@ -10,7 +10,7 @@ public class TemperatureController : MonoBehaviour
     [SerializeField] private MeshRenderer ballSpike;
 
     [Header("Ice Coverage")] private readonly MinMaxPair
-        _iceCoverage = new(min: 0f, max: 0.3f);
+        _iceCoverage = new(min: 0f, max: 0.5f);
 
     private Material _iceCoverSpikes;
     private Material _iceCoverBall;
