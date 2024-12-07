@@ -1,7 +1,6 @@
 using Gaskellgames.CameraController;
 using Minimalist.Quantity;
 using SmartPoint;
-
 using System.Collections;
 using System.Linq;
 using UnityEngine;
@@ -52,23 +51,30 @@ public class QuantityController : MonoBehaviour
         size.Amount = _playerController.ball.MeshSize() * _playerController.ball.Scale()
             + pickUpParent.GetComponentsInChildren<PickUpController>().Sum(Utils.MeshSize);
 
+        // TODO: kill player if it falls below the ground
         if (Mathf.Approximately(durability.FillAmount, Mathf.Epsilon))
+            // || _playerController.ball.transform.position.y < 0f)
             GameOver();
     }
 
     private void GameOver()
     {
-        if (!_playerController.ball.gameObject.activeInHierarchy) return;
+        var ball = _playerController.ball.gameObject;
+        if (!ball.activeInHierarchy) return;
 
         Debug.Log("Game Over!");
-        _playerController.ball.GetComponent<CameraShaker>().Activate();
+        ball.GetComponent<CameraShaker>().Activate();
 
-        // TODO: fracture not the player ball, but it's copy
-        // _playerController.ball.GetComponent<Fracture>().CauseFracture();
+        // Fracture not the player ball, but it's copy instead
+        var temp = Instantiate(ball, ball.transform.position, ball.transform.rotation);
+        temp.transform.parent = null;
+        temp.gameObject.GetComponent<Rigidbody>().mass /= 100f;
+        temp.GetComponent<Fracture>().CauseFracture();
 
         // Destroy all objects picked up and disable the ball itself
-        foreach (Transform child in pickUpParent) Destroy(child.gameObject);
-        _playerController.ball.gameObject.SetActive(false);
+        foreach (Transform child in pickUpParent)
+            Destroy(child.gameObject);
+        ball.SetActive(false);
 
         StartCoroutine(Respawn());
     }
