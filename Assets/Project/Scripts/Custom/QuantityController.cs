@@ -1,6 +1,7 @@
 using Gaskellgames.CameraController;
 using Minimalist.Quantity;
 using SmartPoint;
+
 using System.Collections;
 using System.Linq;
 using UnityEngine;
@@ -25,29 +26,12 @@ public class QuantityController : MonoBehaviour
     public Transform pickUpParent;
 
     private PlayerController _playerController;
-    [HideInInspector] public bool fractured;
-
     private CheckPointController _checkPointController;
 
     private void Start()
     {
         _playerController = GetComponent<PlayerController>();
         _checkPointController = FindObjectOfType<CheckPointController>();
-    }
-
-    private void FixedUpdate()
-    {
-        velocity.Amount = _playerController.ball.velocity.z;
-        pieces.Amount = pickUpParent.childCount;
-
-        size.Amount = _playerController.ball.MeshSize() * _playerController.ball.Scale()
-            + pickUpParent.GetComponentsInChildren<PickUpController>().Sum(Utils.MeshSize);
-    }
-
-    private void Update()
-    {
-        if (!fractured && Mathf.Approximately(durability.FillAmount, Mathf.Epsilon))
-            GameOver();
     }
 
     public void ProcessPickUp(PickUpController controller)
@@ -60,15 +44,32 @@ public class QuantityController : MonoBehaviour
         controller.gameObject.GetComponent<MagneticTool>().IsStatic = true;
     }
 
-    // ReSharper disable once MemberCanBePrivate.Global
-    public void GameOver()
+    private void FixedUpdate()
     {
-        _playerController.ball.GetComponent<CameraShaker>().Activate();
-        // TODO: fracture not the player ball, but it's copy
-        _playerController.ball.GetComponent<Fracture>().CauseFracture();
+        velocity.Amount = _playerController.ball.velocity.z;
+        pieces.Amount = pickUpParent.childCount;
 
-        fractured = true;
-        _playerController.enabled = false;
+        size.Amount = _playerController.ball.MeshSize() * _playerController.ball.Scale()
+            + pickUpParent.GetComponentsInChildren<PickUpController>().Sum(Utils.MeshSize);
+
+        if (Mathf.Approximately(durability.FillAmount, Mathf.Epsilon))
+            GameOver();
+    }
+
+    private void GameOver()
+    {
+        if (!_playerController.ball.gameObject.activeInHierarchy) return;
+
+        Debug.Log("Game Over!");
+        _playerController.ball.GetComponent<CameraShaker>().Activate();
+
+        // TODO: fracture not the player ball, but it's copy
+        // _playerController.ball.GetComponent<Fracture>().CauseFracture();
+
+        // Destroy all objects picked up and disable the ball itself
+        foreach (Transform child in pickUpParent) Destroy(child.gameObject);
+        _playerController.ball.gameObject.SetActive(false);
+
         StartCoroutine(Respawn());
     }
 
@@ -76,25 +77,17 @@ public class QuantityController : MonoBehaviour
     {
         yield return new WaitForSeconds(seconds);
 
+        // Enable player ball back and teleport it to checkpoint
+        _playerController.ball.gameObject.SetActive(true);
         _checkPointController.TeleportToRecentlyActivated(
             _playerController.ball.gameObject);
-        fractured = false;
-        _playerController.enabled = true;
 
-        Reset();
-    }
-
-    private void Reset()
-    {
-        // Restore temperature, spikiness, and durability
+        // Restore temperature, spikiness and durability
         spikiness.FillAmount = 0f;
         temperature.FillAmount = 0.5f;
         durability.FillAmount = 1f;
 
-        // Restore player ball size and destroy all objects picked up
+        // Restore player ball size
         _playerController.ball.transform.localScale = Vector3.one;
-        foreach (Transform child in pickUpParent) Destroy(child.gameObject);
-
-        // _state.nest.SwitchToMacro(stateMachine);
     }
 }
