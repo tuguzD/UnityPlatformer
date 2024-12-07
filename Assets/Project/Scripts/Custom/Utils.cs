@@ -4,7 +4,7 @@ public static class Utils
 {
     public static float MeshSize(this Component component)
     {
-        var result = component.gameObject.GetComponent<MeshFilter>()
+        var result = component.GetComponent<MeshFilter>()
             .sharedMesh.bounds.size.magnitude;
         return result;
     }
@@ -12,8 +12,8 @@ public static class Utils
     public static float Scale(this Component component, bool uniform = true)
     {
         var result = uniform
-            ? component.gameObject.transform.lossyScale.x
-            : component.gameObject.transform.lossyScale.magnitude;
+            ? component.transform.lossyScale.x
+            : component.transform.lossyScale.magnitude;
         return result;
     }
 

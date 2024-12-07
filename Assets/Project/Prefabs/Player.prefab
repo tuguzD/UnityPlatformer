@@ -2925,7 +2925,6 @@ MonoBehaviour:
   plasticity: {fileID: 5162796955552803400}
   magnetisation: {fileID: 1181984059698246943}
   pickUpParent: {fileID: 5903258022085961329}
-  prefab: {fileID: 7562962934770653944}
   fractured: 0
 --- !u!114 &7361398101346918023
 MonoBehaviour:

@@ -1,8 +1,8 @@
-using System.Collections;
 using Gaskellgames.CameraController;
 using Minimalist.Quantity;
-using System.Linq;
 using SmartPoint;
+using System.Collections;
+using System.Linq;
 using UnityEngine;
 
 public class QuantityController : MonoBehaviour
@@ -64,24 +64,37 @@ public class QuantityController : MonoBehaviour
     public void GameOver()
     {
         _playerController.ball.GetComponent<CameraShaker>().Activate();
+        // TODO: fracture not the player ball, but it's copy
         _playerController.ball.GetComponent<Fracture>().CauseFracture();
 
         fractured = true;
         _playerController.enabled = false;
         StartCoroutine(Respawn());
     }
-    
+
     private IEnumerator Respawn(float seconds = 3)
     {
         yield return new WaitForSeconds(seconds);
 
         _checkPointController.TeleportToRecentlyActivated(
             _playerController.ball.gameObject);
+        fractured = false;
+        _playerController.enabled = true;
 
-        // TODO: fracture not the player ball, but it's copy
-        // fractured = false;
-        // _playerController.enabled = true;
-        
-        // TODO: reset all quantities and state machines
+        Reset();
+    }
+
+    private void Reset()
+    {
+        // Restore temperature, spikiness, and durability
+        spikiness.FillAmount = 0f;
+        temperature.FillAmount = 0.5f;
+        durability.FillAmount = 1f;
+
+        // Restore player ball size and destroy all objects picked up
+        _playerController.ball.transform.localScale = Vector3.one;
+        foreach (Transform child in pickUpParent) Destroy(child.gameObject);
+
+        // _state.nest.SwitchToMacro(stateMachine);
     }
 }
