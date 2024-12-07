@@ -4,19 +4,23 @@ public class TemperatureController : MonoBehaviour
 {
     private static readonly int EmissionID =
         Shader.PropertyToID("_EmissionColor");
+    private static readonly int NormalMapScale =
+        Shader.PropertyToID("_BumpScale");
 
     private QuantityController _quantities;
 
     [SerializeField] private MeshRenderer ballSpike;
 
     [Header("Ice Coverage")] private readonly MinMaxPair
-        _iceCoverage = new(min: 0f, max: 0.5f);
+        _iceCoverage = new(min: 0f, max: 0.2f);
+    [Header("Ice Roughness")] private readonly MinMaxPair
+        _iceRoughness = new(min: 0f, max: 4f);
 
     private Material _iceCoverSpikes;
     private Material _iceCoverBall;
 
     [Header("Hot Glowing")] private readonly MinMaxPair
-        _glowPower = new(min: 0f, max: 0.2f);
+        _glowPower = new(min: 0f, max: 0.05f);
 
     private Material _hotGlowSpikes;
     private Material _hotGlowBall;
@@ -41,16 +45,19 @@ public class TemperatureController : MonoBehaviour
     {
         var hotColor = _emissionColor;
         var iceOpacity = 0f;
+        var iceRoughness = 0f;
 
         var temperature = _quantities.temperature.Amount;
         if (temperature < 0)
         {
             hotColor *= 0f;
             iceOpacity = _iceCoverage.Scaled(-1 * temperature);
+            iceRoughness = _iceRoughness.Scaled(-1 * temperature);
         }
         else hotColor *= _glowPower.Scaled(temperature);
 
         _iceCoverBall.SetOpacity(iceOpacity);
+        _iceCoverBall.SetFloat(NormalMapScale, iceRoughness);
         _iceCoverSpikes.SetOpacity(iceOpacity);
 
         _hotGlowBall.SetColor(EmissionID, hotColor);
