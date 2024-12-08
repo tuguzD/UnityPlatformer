@@ -1391,6 +1391,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 1333073185178226399}
+  projectile: {fileID: 919132149155446097, guid: df52556f0b0a63c4ebae12a6553c0b7d,
+    type: 3}
 --- !u!114 &2128082178890900813
 MonoBehaviour:
   m_ObjectHideFlags: 0

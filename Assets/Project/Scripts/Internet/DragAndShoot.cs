@@ -1,3 +1,5 @@
+// Total changes: 1
+
 using UnityEngine;
 
 /* Source of class:
@@ -8,8 +10,9 @@ public class DragAndShoot : MonoBehaviour
     private Vector3 _stopPosition;
 
     public Rigidbody rb;
+    public GameObject projectile;
 
-    // TODO: switch to 
+    // TODO: switch to new input system
     private void OnMouseDown()
     {
         _startPosition = Input.mousePosition;
@@ -18,9 +21,17 @@ public class DragAndShoot : MonoBehaviour
     private void OnMouseUp()
     {
         _stopPosition = Input.mousePosition;
+        Shoot(_startPosition - _stopPosition);
+    }
 
-        var force = _startPosition - _stopPosition;
-        if (force.y > 0)
-            rb.AddForce(new Vector3(force.x, force.y, force.y));
+    private void Shoot(Vector3 input)
+    {
+        var force = new Vector3(input.x, input.y, input.y);
+        rb.AddForce(force);
+
+        // Change #1: Spawn projectile with opposite force (due to Newton's Third Law)
+        var smth = Instantiate(projectile, transform.position, transform.rotation);
+        smth.AddComponent<Rigidbody>();
+        smth.GetComponent<Rigidbody>().AddForce(-force);
     }
 }
