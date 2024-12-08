@@ -101,7 +101,8 @@ public class QuantityController : MonoBehaviour
         temperature.FillAmount = 0.5f;
         durability.FillAmount = 1f;
 
-        // Restore player ball size
+        // Restore player ball size and velocity
         _ball.transform.localScale = Vector3.one;
+        _playerController.ball.velocity = Vector3.zero;
     }
 }
