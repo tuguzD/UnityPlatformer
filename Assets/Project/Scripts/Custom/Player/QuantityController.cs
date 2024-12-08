@@ -18,51 +18,13 @@ public class QuantityController : MonoBehaviour
     public QuantityBhv plasticity;
     public QuantityBhv magnetisation;
 
-    [Header("Pick-ups")]
-    public Transform pickUpParent;
-
-    private PlayerController _playerController;
-
-    private void Start()
-    {
-        _playerController = GetComponent<PlayerController>();
-    }
-
     private void FixedUpdate()
     {
         velocity.Amount = _playerController.ball.velocity.z;
-        pieces.Amount = pickUpParent.childCount;
+        pieces.Amount = _pickUps.pickUpParent.childCount;
 
         size.Amount = _playerController.ball.MeshSize() * _playerController.ball.Scale()
-            + pickUpParent.GetComponentsInChildren<PickUpObject>().Sum(Utils.MeshSize);
-    }
-
-    public void ProcessPickUp(PickUpObject pickUp)
-    {
-        spikiness.Amount += _playerController.GetComponentInChildren
-            <SpikinessController>().pieceToSpikinessMultiplier;
-
-        Destroy(pickUp.body);
-        pickUp.gameObject.GetComponent<Collider>().enabled = false;
-        pickUp.gameObject.GetComponent<MagneticTool>().IsStatic = true;
-    }
-
-    public GameObject projectile;
-
-    public bool ConsumePickUp(Vector3 forceOpposite)
-    {
-        var smth = Instantiate(
-            projectile, _playerController.ball.position, _playerController.ball.rotation);
-        smth.AddComponent<Rigidbody>();
-        smth.GetComponent<Rigidbody>().AddForce(forceOpposite);
-
-        return true;
-    }
-
-    public void RemovePickUps()
-    {
-        foreach (Transform child in pickUpParent)
-            Destroy(child.gameObject);
+            + _pickUps.pickUpParent.GetComponentsInChildren<PickUpObject>().Sum(Utils.MeshSize);
     }
 
     public void Restore()
@@ -83,5 +45,14 @@ public class QuantityController : MonoBehaviour
         // Restore player ball size and velocity
         _playerController.ball.velocity = Vector3.zero;
         _playerController.ball.transform.localScale = Vector3.one;
+    }
+
+    private PickUpsController _pickUps;
+    private PlayerController _playerController;
+
+    private void Start()
+    {
+        _pickUps = GetComponent<PickUpsController>();
+        _playerController = GetComponent<PlayerController>();
     }
 }

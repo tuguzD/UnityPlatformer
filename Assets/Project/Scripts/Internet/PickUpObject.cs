@@ -25,10 +25,10 @@ public class PickUpObject : MonoBehaviour
     {
         // Change #2: restructure code to avoid unnecessary processing
         if (!ball.gameObject.CompareTag("Player")) return;
-        var quantities = ball.gameObject.GetComponentInParent<QuantityController>();
+        var pickUps = ball.gameObject.GetComponentInParent<PickUpsController>();
 
-        transform.parent = quantities.pickUpParent;
+        transform.parent = pickUps.pickUpParent;
         // Change #3: move processing code to other class instead of increasing size
-        quantities.ProcessPickUp(this);
+        pickUps.ProcessPickUp(this);
     }
 }

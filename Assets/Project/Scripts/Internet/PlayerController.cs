@@ -7,8 +7,6 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    public QuantityController quantities;
-
     /* Source of code below:
      * https://www.youtube.com/watch?v=FsYI9D3aukY&list=PLD8pFQ5A8vv6U4Sm0JKdcNGGOOZNoX2lv&index=2 */
     // Total changes: 2
@@ -20,14 +18,14 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         // Change #1: set minimum speed if it's too low
-        if (ball.velocity.z < quantities.velocity.MinimumAmount) PhysicsHelper.ApplyForceToReachVelocity(
-            velocity: Vector3.forward * quantities.velocity.MinimumAmount, rigidbody: ball, force: float.MaxValue);
+        if (ball.velocity.z < _quantities.velocity.MinimumAmount) PhysicsHelper.ApplyForceToReachVelocity(
+            velocity: Vector3.forward * _quantities.velocity.MinimumAmount, rigidbody: ball, force: float.MaxValue);
 
         // Change #2: disable input movement if not grounded
         if (!groundChecker.IsGrounded()) return;
         var movement = _input.Game.Movement.ReadValue<Vector2>();
 
-        ball.AddForce(new Vector3(movement.x, 0.0f, movement.y) * (speedup * quantities.size.Amount));
+        ball.AddForce(new Vector3(movement.x, 0.0f, movement.y) * (speedup * _quantities.size.Amount));
     }
     
     /* Source of code below:
@@ -54,7 +52,7 @@ public class PlayerController : MonoBehaviour
         var force = new Vector3(input.x, input.y, input.y);
 
         // Change #3: Try spawning pick-up with an opposite force (Newton's Third Law)
-        if (quantities.ConsumePickUp(-force)) ball.AddForce(force);
+        if (_pickUps.ConsumePickUp(-force)) ball.AddForce(force);
     }
 
     /* Use new input system with examples borrowed from:
@@ -77,5 +75,14 @@ public class PlayerController : MonoBehaviour
     {
         _input.Game.Impulse.started -= CachePosition;
         _input.Game.Impulse.canceled -= UseCachedPosition;
+    }
+
+    private PickUpsController _pickUps;
+    private QuantityController _quantities;
+
+    private void Start()
+    {
+        _pickUps = GetComponent<PickUpsController>();
+        _quantities = GetComponent<QuantityController>();
     }
 }

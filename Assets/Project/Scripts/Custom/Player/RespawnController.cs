@@ -6,19 +6,6 @@ using UnityEngine;
 public class RespawnController : MonoBehaviour
 {
     public float killHeight = -5f;
-    
-    private CheckPointController _checkPointController;
-    private QuantityController _quantities;
-    private GameObject _ball;
-
-    private void Start()
-    {
-        _checkPointController =
-            GetComponentInParent<CheckPointController>();
-
-        _quantities = GetComponent<QuantityController>();
-        _ball = GetComponent<PlayerController>().ball.gameObject;
-    }
 
     private void Update()
     {
@@ -50,7 +37,7 @@ public class RespawnController : MonoBehaviour
         BallFracture();
 
         // Destroy all objects picked up and disable the ball itself
-        _quantities.RemovePickUps();
+        _pickUps.RemovePickUps();
         _ball.SetActive(false);
 
         StartCoroutine(Respawn());
@@ -62,8 +49,23 @@ public class RespawnController : MonoBehaviour
 
         // Enable player ball back and teleport it to checkpoint
         _ball.SetActive(true);
-        _checkPointController.TeleportToRecentlyActivated(_ball);
+        _checkPoints.TeleportToRecentlyActivated(_ball);
 
         _quantities.Restore();
+    }
+
+    private CheckPointController _checkPoints;
+    private PickUpsController _pickUps;
+
+    private QuantityController _quantities;
+    private GameObject _ball;
+
+    private void Start()
+    {
+        _checkPoints = GetComponentInParent<CheckPointController>();
+        _pickUps = GetComponent<PickUpsController>();
+
+        _quantities = GetComponent<QuantityController>();
+        _ball = GetComponent<PlayerController>().ball.gameObject;
     }
 }
