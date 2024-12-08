@@ -3,10 +3,10 @@
 using Ditzelgames;
 using UnityEngine;
 
-public class PickUpController : MonoBehaviour
+public class PickUpObject : MonoBehaviour
 {
     [Header("Physics")]
-    public Rigidbody pickUp;
+    public Rigidbody body;
 
     /* Source of rotation logic:
      * https://github.com/deviantdear/RollABall/blob/master/Assets/Scripts/Rotator.cs */
@@ -15,7 +15,7 @@ public class PickUpController : MonoBehaviour
     private void Update()
     {
         // Change #1: add physics-based rotation, not transform-based
-        if (pickUp) pickUp.angularVelocity = PhysicsHelper
+        if (body) body.angularVelocity = PhysicsHelper
             .QuaternionToAngularVelocity(Quaternion.AngleAxis(anglePerSecond, Vector3.up));
     }
 

@@ -35,6 +35,7 @@ public class RespawnController : MonoBehaviour
         var temp = Instantiate(
             _ball, _ball.transform.position, _ball.transform.rotation);
         temp.transform.parent = null;
+        temp.tag = "Break";
 
         temp.gameObject.GetComponent<Rigidbody>().mass /= 100f;
         temp.GetComponent<Fracture>().CauseFracture();

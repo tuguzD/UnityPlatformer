@@ -21,18 +21,18 @@ public class DurabilityController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("PickUp")
-            || (collision.gameObject.CompareTag("Break") && !collision.gameObject.GetComponent<Fracture>())
-        ) return;
+        var @object = collision.gameObject;
+        var broken = @object.CompareTag("Break") && !@object.GetComponent<Fracture>();
+        if (@object.CompareTag("PickUp") || broken) return;
 
         var relativeVelocity = Vector3.Scale(collision.relativeVelocity, collision.contacts[0].normal);
         // combine both height (y) and forward speed (z)
         var damageVelocity = Mathf.Abs(relativeVelocity.y) + Mathf.Abs(relativeVelocity.z);
-        if (collision.gameObject.CompareTag("Break")) damageVelocity /= 2;
+        if (@object.CompareTag("Break")) damageVelocity /= 2;
 
         if (damageVelocity < threshold) return;
         // apply "damage" to the player ball
-        Debug.Log($"Hit {collision.gameObject.name} with power {damageVelocity}");
+        Debug.Log($"Hit {@object.name} with power {damageVelocity}");
         _quantities.durability.Amount -= DamageApplied(damageVelocity);
     }
 

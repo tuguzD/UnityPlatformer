@@ -34,17 +34,17 @@ public class QuantityController : MonoBehaviour
         pieces.Amount = pickUpParent.childCount;
 
         size.Amount = _playerController.ball.MeshSize() * _playerController.ball.Scale()
-            + pickUpParent.GetComponentsInChildren<PickUpController>().Sum(Utils.MeshSize);
+            + pickUpParent.GetComponentsInChildren<PickUpObject>().Sum(Utils.MeshSize);
     }
 
-    public void ProcessPickUp(PickUpController controller)
+    public void ProcessPickUp(PickUpObject pickUp)
     {
         spikiness.Amount += _playerController.GetComponentInChildren
             <SpikinessController>().pieceToSpikinessMultiplier;
 
-        Destroy(controller.pickUp);
-        controller.gameObject.GetComponent<Collider>().enabled = false;
-        controller.gameObject.GetComponent<MagneticTool>().IsStatic = true;
+        Destroy(pickUp.body);
+        pickUp.gameObject.GetComponent<Collider>().enabled = false;
+        pickUp.gameObject.GetComponent<MagneticTool>().IsStatic = true;
     }
 
     public GameObject projectile;

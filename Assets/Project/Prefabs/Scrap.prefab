@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d7bb5f445d0ccf45b37d7c81ee151eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pickUp: {fileID: 2149920667443855532}
+  body: {fileID: 2149920667443855532}
   anglePerSecond: 30
 --- !u!64 &2298438239894226733
 MeshCollider:
