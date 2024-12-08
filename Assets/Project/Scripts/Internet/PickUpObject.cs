@@ -1,4 +1,4 @@
-// Total changes: 3
+// Total changes: 4
 
 using Ditzelgames;
 using System.Collections;
@@ -16,8 +16,8 @@ public class PickUpObject : MonoBehaviour
     private void Update()
     {
         // Change #1: add physics-based rotation, not transform-based
-        if (body) body.angularVelocity = PhysicsHelper
-            .QuaternionToAngularVelocity(Quaternion.AngleAxis(anglePerSecond, Vector3.up));
+        if (body) body.angularVelocity = PhysicsHelper.QuaternionToAngularVelocity(
+            Quaternion.AngleAxis(anglePerSecond, Vector3.up));
     }
 
     /* Adapted from source of method:
@@ -26,17 +26,18 @@ public class PickUpObject : MonoBehaviour
     {
         // Change #2: restructure code to avoid unnecessary processing
         if (!ball.gameObject.CompareTag("Player")) return;
-        // if (!GetComponent<MagneticTool>().TurnOnMagnetism)
-        // {
-        //     Physics.IgnoreCollision(ball.collider, GetComponent<Collider>(), true);
-        //     return;
-        // }
-        // Physics.IgnoreCollision(ball.collider, GetComponent<Collider>(), false);
-
         var pickUps = ball.gameObject.GetComponentInParent<PickUpsController>();
 
+        // Change #3: ignore collision with players when pick-up is switched off
+        if (!GetComponent<MagneticTool>().TurnOnMagnetism)
+        {
+            Physics.IgnoreCollision(ball.collider, GetComponent<Collider>());
+            StartCoroutine(StopIgnoreCollision(ball.collider));
+            return;
+        }
+
         transform.parent = pickUps.pickUpParent;
-        // Change #3: move processing code to other class instead of increasing size
+        // Change #4: move processing code to other class instead of increasing size
         pickUps.Add(this);
     }
 
@@ -45,13 +46,17 @@ public class PickUpObject : MonoBehaviour
         var magnetism = GetComponent<MagneticTool>();
         magnetism.TurnOnMagnetism = enable;
         magnetism.AffectByMagnetism = enable;
-
-        GetComponent<Collider>().enabled = enable;
     }
 
-    public IEnumerator Enable()
+    private IEnumerator StopIgnoreCollision(Collider first, float seconds = 0.1f)
     {
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(seconds);
+        Physics.IgnoreCollision(first, GetComponent<Collider>(), false);
+    }
+
+    public IEnumerator Enable(float seconds = 0.1f)
+    {
+        yield return new WaitForSeconds(seconds);
         Switch(true);
     }
 }
