@@ -1,31 +1,54 @@
-// Total changes: 2
+// Total changes: 4
 
 using BSGames.Modules.GroundCheck;
 using Ditzelgames;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-/* Source of class:
- * https://www.youtube.com/watch?v=FsYI9D3aukY&list=PLD8pFQ5A8vv6U4Sm0JKdcNGGOOZNoX2lv&index=2 */
 public class PlayerController : MonoBehaviour
 {
     public QuantityController quantities;
 
-    [Header("Physics")] // Example from "Ground Checking Kit" asset docs
+    [Header("Physics")]
     public Rigidbody ball;
     public float speedup = 7.5f;
     public GroundCheck groundChecker;
 
-    private float _inputRoll;
-    private float _inputSpeed;
+    [Header("Inputs")]
+    [SerializeField] private InputActionReference movementInput;
+    [SerializeField] private InputActionReference impulseInput;
+    [SerializeField] private InputActionReference positionInput;
 
-    private void OnMove(InputValue value)
+    private Vector2 _cachedPosition;
+    public GameObject projectile;
+
+    /* Source of methods:
+     * https://gist.github.com/seferciogluecce/e57dd9e884bd38d2925f3de7826f5dd4 */
+    // Total changes: 2
+    private void Start()
     {
-        var movementVector = value.Get<Vector2>();
-        _inputRoll = movementVector.x;
-        _inputSpeed = movementVector.y;
+        /* Change #1: use new input system, using examples borrowed from:
+         * https://www.youtube.com/watch?v=-c_LYQgG8BY
+         * https://www.youtube.com/watch?v=kP7BawiCCZU */
+        impulseInput.action.started += _ => _cachedPosition = positionInput.action.ReadValue<Vector2>();
+        impulseInput.action.canceled += _ => Shoot(
+            _cachedPosition - positionInput.action.ReadValue<Vector2>());
     }
 
+    private void Shoot(Vector2 input)
+    {
+        var force = new Vector3(input.x, input.y, input.y);
+        ball.AddForce(force);
+
+        // Change #2: Spawn projectile with opposite force (due to Newton's Third Law)
+        var smth = Instantiate(projectile, ball.position, ball.rotation);
+        smth.AddComponent<Rigidbody>();
+        smth.GetComponent<Rigidbody>().AddForce(-force);
+    }
+
+    /* Source of method:
+     * https://www.youtube.com/watch?v=FsYI9D3aukY&list=PLD8pFQ5A8vv6U4Sm0JKdcNGGOOZNoX2lv&index=2 */
+    // Total changes: 2
     private void FixedUpdate()
     {
         // Change #1: set minimum speed if it's too low
@@ -33,9 +56,9 @@ public class PlayerController : MonoBehaviour
             velocity: Vector3.forward * quantities.velocity.MinimumAmount, rigidbody: ball, force: float.MaxValue);
 
         // Change #2: disable input movement if not grounded
-        var movement = !groundChecker.IsGrounded() ? new Vector3()
-            : new Vector3(_inputRoll, 0.0f, _inputSpeed);
+        if (!groundChecker.IsGrounded()) return;
+        var movement = movementInput.action.ReadValue<Vector2>();
 
-        ball.AddForce(movement * (speedup * quantities.size.Amount));
+        ball.AddForce(new Vector3(movement.x, 0.0f, movement.y) * (speedup * quantities.size.Amount));
     }
 }
