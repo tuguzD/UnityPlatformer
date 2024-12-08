@@ -2932,8 +2932,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pickUpParent: {fileID: 5903258022085961329}
-  projectile: {fileID: 919132149155446097, guid: df52556f0b0a63c4ebae12a6553c0b7d,
-    type: 3}
+  prefab: {fileID: 6045543604457452466, guid: d2f2a33c1ffe406429e213db35273f76, type: 3}
 --- !u!114 &7139617762574630719
 MonoBehaviour:
   m_ObjectHideFlags: 0

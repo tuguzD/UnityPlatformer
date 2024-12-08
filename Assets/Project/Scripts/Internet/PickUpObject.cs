@@ -1,6 +1,7 @@
 // Total changes: 3
 
 using Ditzelgames;
+using System.Collections;
 using UnityEngine;
 
 public class PickUpObject : MonoBehaviour
@@ -25,10 +26,32 @@ public class PickUpObject : MonoBehaviour
     {
         // Change #2: restructure code to avoid unnecessary processing
         if (!ball.gameObject.CompareTag("Player")) return;
+        // if (!GetComponent<MagneticTool>().TurnOnMagnetism)
+        // {
+        //     Physics.IgnoreCollision(ball.collider, GetComponent<Collider>(), true);
+        //     return;
+        // }
+        // Physics.IgnoreCollision(ball.collider, GetComponent<Collider>(), false);
+
         var pickUps = ball.gameObject.GetComponentInParent<PickUpsController>();
 
         transform.parent = pickUps.pickUpParent;
         // Change #3: move processing code to other class instead of increasing size
-        pickUps.ProcessPickUp(this);
+        pickUps.Add(this);
+    }
+
+    public void Switch(bool enable)
+    {
+        var magnetism = GetComponent<MagneticTool>();
+        magnetism.TurnOnMagnetism = enable;
+        magnetism.AffectByMagnetism = enable;
+
+        GetComponent<Collider>().enabled = enable;
+    }
+
+    public IEnumerator Enable()
+    {
+        yield return new WaitForSeconds(0.1f);
+        Switch(true);
     }
 }

@@ -37,7 +37,7 @@ public class RespawnController : MonoBehaviour
         BallFracture();
 
         // Destroy all objects picked up and disable the ball itself
-        _pickUps.RemovePickUps();
+        _pickUps.Clear();
         _ball.SetActive(false);
 
         StartCoroutine(Respawn());

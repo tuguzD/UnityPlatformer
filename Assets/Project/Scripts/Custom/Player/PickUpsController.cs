@@ -3,7 +3,40 @@ using UnityEngine;
 public class PickUpsController : MonoBehaviour
 {
     public Transform pickUpParent;
-    public GameObject projectile;
+    public GameObject prefab;
+
+    public void Add(PickUpObject pickUp)
+    {
+        _quantities.spikiness.Amount += _playerController.GetComponentInChildren
+            <SpikinessController>().pieceToSpikinessMultiplier;
+
+        Destroy(pickUp.body);
+        pickUp.GetComponent<Collider>().enabled = false;
+        pickUp.GetComponent<MagneticTool>().IsStatic = true;
+    }
+
+    public void Clear()
+    {
+        foreach (Transform child in pickUpParent)
+            Destroy(child.gameObject);
+    }
+
+    public bool Use(Vector3 forceOpposite)
+    {
+        if (pickUpParent.childCount <= 0) return false;
+        Destroy(pickUpParent.GetChild(Random
+            .Range(0, pickUpParent.childCount)).gameObject);
+
+        var @object = Instantiate(
+            prefab, _playerController.ball.position, _playerController.ball.rotation);
+        @object.GetComponent<Rigidbody>().AddForce(forceOpposite);
+
+        var pickUp = @object.GetComponent<PickUpObject>();
+        pickUp.Switch(false);
+        StartCoroutine(pickUp.Enable());
+
+        return true;
+    }
 
     private QuantityController _quantities;
     private PlayerController _playerController;
@@ -12,31 +45,5 @@ public class PickUpsController : MonoBehaviour
     {
         _quantities = GetComponent<QuantityController>();
         _playerController = GetComponent<PlayerController>();
-    }
-
-    public void ProcessPickUp(PickUpObject pickUp)
-    {
-        _quantities.spikiness.Amount += _playerController.GetComponentInChildren
-            <SpikinessController>().pieceToSpikinessMultiplier;
-
-        Destroy(pickUp.body);
-        pickUp.gameObject.GetComponent<Collider>().enabled = false;
-        pickUp.gameObject.GetComponent<MagneticTool>().IsStatic = true;
-    }
-
-    public bool ConsumePickUp(Vector3 forceOpposite)
-    {
-        var smth = Instantiate(
-            projectile, _playerController.ball.position, _playerController.ball.rotation);
-        smth.AddComponent<Rigidbody>();
-        smth.GetComponent<Rigidbody>().AddForce(forceOpposite);
-
-        return true;
-    }
-
-    public void RemovePickUps()
-    {
-        foreach (Transform child in pickUpParent)
-            Destroy(child.gameObject);
     }
 }

@@ -1,4 +1,4 @@
-// Total changes: 5
+// Total changes: 6
 
 using BSGames.Modules.GroundCheck;
 using Ditzelgames;
@@ -49,10 +49,12 @@ public class PlayerController : MonoBehaviour
 
     private void Shoot(Vector2 input)
     {
-        var force = new Vector3(input.x, input.y, input.y);
+        // Change #3: make force uniform, or dependent only on direction of user input
+        var force = new Vector3(input.x, input.y, input.y).normalized *
+            (15f * speedup * _quantities.velocity.MinimumAmount);
 
-        // Change #3: Try spawning pick-up with an opposite force (Newton's Third Law)
-        if (_pickUps.ConsumePickUp(-force)) ball.AddForce(force);
+        // Change #4: try spawning pick-up with an opposite force (Newton's Third Law)
+        if (_pickUps.Use(-force)) ball.AddForce(force);
     }
 
     /* Use new input system with examples borrowed from:
