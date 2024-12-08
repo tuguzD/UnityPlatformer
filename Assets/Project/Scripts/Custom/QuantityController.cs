@@ -26,11 +26,14 @@ public class QuantityController : MonoBehaviour
 
     private PlayerController _playerController;
     private CheckPointController _checkPointController;
+    private GameObject _ball;
 
     private void Start()
     {
         _playerController = GetComponent<PlayerController>();
         _checkPointController = FindObjectOfType<CheckPointController>();
+
+        _ball = _playerController.ball.gameObject;
     }
 
     public void ProcessPickUp(PickUpController controller)
@@ -51,22 +54,21 @@ public class QuantityController : MonoBehaviour
         size.Amount = _playerController.ball.MeshSize() * _playerController.ball.Scale()
             + pickUpParent.GetComponentsInChildren<PickUpController>().Sum(Utils.MeshSize);
 
-        // TODO: kill player if it falls below the ground
-        if (Mathf.Approximately(durability.FillAmount, Mathf.Epsilon))
-            // || _playerController.ball.transform.position.y < 0f)
+        if (Mathf.Approximately(durability.FillAmount, Mathf.Epsilon)
+            || _playerController.ball.transform.position.y < -2f)
             GameOver();
     }
 
     private void GameOver()
     {
-        var ball = _playerController.ball.gameObject;
-        if (!ball.activeInHierarchy) return;
+        if (!_ball.activeInHierarchy) return;
 
         Debug.Log("Game Over!");
-        ball.GetComponent<CameraShaker>().Activate();
+        _ball.GetComponent<CameraShaker>().Activate();
 
         // Fracture not the player ball, but it's copy instead
-        var temp = Instantiate(ball, ball.transform.position, ball.transform.rotation);
+        var temp = Instantiate(
+            _ball, _ball.transform.position, _ball.transform.rotation);
         temp.transform.parent = null;
         temp.gameObject.GetComponent<Rigidbody>().mass /= 100f;
         temp.GetComponent<Fracture>().CauseFracture();
@@ -74,7 +76,7 @@ public class QuantityController : MonoBehaviour
         // Destroy all objects picked up and disable the ball itself
         foreach (Transform child in pickUpParent)
             Destroy(child.gameObject);
-        ball.SetActive(false);
+        _ball.SetActive(false);
 
         StartCoroutine(Respawn());
     }
@@ -84,16 +86,22 @@ public class QuantityController : MonoBehaviour
         yield return new WaitForSeconds(seconds);
 
         // Enable player ball back and teleport it to checkpoint
-        _playerController.ball.gameObject.SetActive(true);
-        _checkPointController.TeleportToRecentlyActivated(
-            _playerController.ball.gameObject);
+        _ball.SetActive(true);
+        _checkPointController.TeleportToRecentlyActivated(_ball);
+        // Restore position of a ground checking script
+        _playerController.groundChecker.GroundChecker
+            .SetTransform(_ball.transform);
 
-        // Restore temperature, spikiness and durability
+        // Restore initial ball spikiness
+        spikiness.MinimumAmount = 0f;
+        spikiness.MaximumAmount = 1f;
         spikiness.FillAmount = 0f;
+
+        // Restore ball temperature and durability
         temperature.FillAmount = 0.5f;
         durability.FillAmount = 1f;
 
         // Restore player ball size
-        _playerController.ball.transform.localScale = Vector3.one;
+        _ball.transform.localScale = Vector3.one;
     }
 }
