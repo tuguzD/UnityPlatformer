@@ -13,7 +13,8 @@ public class RespawnController : MonoBehaviour
 
     private void Start()
     {
-        _checkPointController = FindObjectOfType<CheckPointController>();
+        _checkPointController =
+            GetComponentInParent<CheckPointController>();
 
         _quantities = GetComponent<QuantityController>();
         _ball = GetComponent<PlayerController>().ball.gameObject;
