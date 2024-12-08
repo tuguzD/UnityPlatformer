@@ -47,6 +47,18 @@ public class QuantityController : MonoBehaviour
         controller.gameObject.GetComponent<MagneticTool>().IsStatic = true;
     }
 
+    public GameObject projectile;
+
+    public bool ConsumePickUp(Vector3 forceOpposite)
+    {
+        var smth = Instantiate(
+            projectile, _playerController.ball.position, _playerController.ball.rotation);
+        smth.AddComponent<Rigidbody>();
+        smth.GetComponent<Rigidbody>().AddForce(forceOpposite);
+
+        return true;
+    }
+
     public void RemovePickUps()
     {
         foreach (Transform child in pickUpParent)
