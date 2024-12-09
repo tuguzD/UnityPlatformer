@@ -29,10 +29,6 @@ public class QuantityController : MonoBehaviour
 
     public void Restore()
     {
-        // Restore position of a ground checking script
-        _playerController.groundChecker.
-            NewTransform(_playerController.ball);
-        
         // Restore initial ball spikiness
         spikiness.MinimumAmount = 0f;
         spikiness.MaximumAmount = 1f;

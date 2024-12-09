@@ -59,7 +59,6 @@ public class PlayerController : MonoBehaviour
         // Change #3: prevent shooting if the input is too small to prevent loosing pick-ups
         if (!Mathf.Approximately(Mathf.Abs(difference.magnitude), Mathf.Epsilon))
             Shoot(difference);
-        groundChecker.NewTransform(ball);
     }
 
     private void Shoot(Vector2 input)

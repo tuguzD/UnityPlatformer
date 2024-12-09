@@ -31,11 +31,6 @@ public static class Utils
         );
     }
 
-    public static void NewTransform(this GroundCheck check, Component component)
-    {
-        check.GroundChecker.SetTransform(component.transform);
-    }
-
     // Fracture a copy of an object
     public static void SpawnFragments(this MonoBehaviour mono, Component component, float scale = 1f)
     {
@@ -51,6 +46,10 @@ public static class Utils
 
         result.gameObject.GetComponent<Rigidbody>().mass /= 100f;
         result.GetComponent<Fracture>().CauseFracture();
+
+        // Restore position of a ground checking script
+        result.GetComponent<GroundCheck>().GroundChecker.
+            SetTransform(component.transform);
 
         mono.StartCoroutine(DestroyFragments(temp));
     }
