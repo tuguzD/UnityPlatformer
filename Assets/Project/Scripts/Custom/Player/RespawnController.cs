@@ -5,11 +5,13 @@ using UnityEngine;
 
 public class RespawnController : MonoBehaviour
 {
+    public float respawnTime = 3f;
     public float killHeight = -5f;
 
     private void Update()
     {
-        var destroyed = Mathf.Approximately(_quantities.durability.FillAmount, Mathf.Epsilon);
+        var destroyed = Mathf.Approximately(
+            _quantities.durability.FillAmount, Mathf.Epsilon);
         var fellOff = _ball.transform.position.y < killHeight;
 
         // Check for "game over" conditions
@@ -22,7 +24,7 @@ public class RespawnController : MonoBehaviour
         Debug.Log("Game Over!");
 
         _ball.GetComponent<CameraShaker>().Activate();
-        _playerController.ball.SpawnFragments();
+        this.SpawnFragments(_playerController.ball);
 
         // Destroy all objects picked up and disable the ball itself
         _pickUps.Clear();
@@ -31,9 +33,9 @@ public class RespawnController : MonoBehaviour
         StartCoroutine(Respawn());
     }
 
-    private IEnumerator Respawn(float seconds = 3)
+    private IEnumerator Respawn()
     {
-        yield return new WaitForSeconds(seconds);
+        yield return new WaitForSeconds(respawnTime);
 
         // Enable player ball back and teleport it to checkpoint
         _ball.SetActive(true);

@@ -59,6 +59,7 @@ public class PlayerController : MonoBehaviour
         // Change #3: prevent shooting if the input is too small to prevent loosing pick-ups
         if (!Mathf.Approximately(Mathf.Abs(difference.magnitude), Mathf.Epsilon))
             Shoot(difference);
+        groundChecker.NewTransform(ball);
     }
 
     private void Shoot(Vector2 input)
@@ -73,7 +74,7 @@ public class PlayerController : MonoBehaviour
         else
         {
             _quantities.durability.Amount -= _quantities.durability.MaximumAmount / 4f;
-            ball.SpawnFragments(0.5f);
+            this.SpawnFragments(ball, 0.5f);
             force /= 1.5f;
         }
         ball.AddForce(force);

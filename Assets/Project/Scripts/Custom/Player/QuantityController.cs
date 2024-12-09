@@ -30,8 +30,8 @@ public class QuantityController : MonoBehaviour
     public void Restore()
     {
         // Restore position of a ground checking script
-        _playerController.groundChecker.GroundChecker
-            .SetTransform(_playerController.ball.transform);
+        _playerController.groundChecker.
+            NewTransform(_playerController.ball);
         
         // Restore initial ball spikiness
         spikiness.MinimumAmount = 0f;
@@ -44,7 +44,8 @@ public class QuantityController : MonoBehaviour
 
         // Restore player ball size and velocity
         _playerController.ball.velocity = Vector3.zero;
-        _playerController.ball.transform.localScale = Vector3.one;
+        _playerController.ball.
+            transform.localScale = Vector3.one;
     }
 
     private PickUpsController _pickUps;

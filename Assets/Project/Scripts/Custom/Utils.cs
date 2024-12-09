@@ -1,3 +1,5 @@
+using BSGames.Modules.GroundCheck;
+using System.Collections;
 using UnityEngine;
 
 public static class Utils
@@ -29,18 +31,33 @@ public static class Utils
         );
     }
 
-    // Fracture a copy of an object
-    public static void SpawnFragments(this Component component, float scale = 1f)
+    public static void NewTransform(this GroundCheck check, Component component)
     {
+        check.GroundChecker.SetTransform(component.transform);
+    }
+
+    // Fracture a copy of an object
+    public static void SpawnFragments(this MonoBehaviour mono, Component component, float scale = 1f)
+    {
+        var temp = new GameObject("Fragments");
+
         var result = Object.Instantiate(
             component, component.transform.position, component.transform.rotation);
 
         result.transform.localScale =
             component.transform.localScale * scale;
-        result.transform.parent = null;
+        result.transform.parent = temp.transform;
         result.tag = "Break";
 
         result.gameObject.GetComponent<Rigidbody>().mass /= 100f;
         result.GetComponent<Fracture>().CauseFracture();
+
+        mono.StartCoroutine(DestroyFragments(temp));
+    }
+
+    private static IEnumerator DestroyFragments(GameObject @object) {
+        yield return new WaitForSeconds(1f);
+
+        Object.Destroy(@object);
     }
 }
