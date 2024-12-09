@@ -12,16 +12,18 @@ public class ObstacleFracture : MonoBehaviour
         _fracture = GetComponent<Fracture>();
     }
 
-    private void OnCollisionEnter(Collision ball)
+    private void OnCollisionEnter(Collision other)
     {
-        if (!ball.gameObject.CompareTag("Player")) return;
-        if (CollisionForce(ball) > durability)
-            _fracture.CauseFracture();
+        var @object = other.gameObject;
+
+        var player = @object.CompareTag("Player") && CollisionForce(@object) > durability;
+        var pickUp = @object.CompareTag("PickUp") && other.impulse.magnitude > durability / 5f;
+        if (player || pickUp) _fracture.CauseFracture();
     }
 
-    private static float CollisionForce(Collision ball)
+    private static float CollisionForce(GameObject ball)
     {
-        var quantities = ball.gameObject.GetComponentInParent<QuantityController>();
+        var quantities = ball.GetComponentInParent<QuantityController>();
         if (!quantities) return 0f;
 
         var mass = quantities.size.Amount;

@@ -24,8 +24,8 @@ public class PickUpsController : MonoBehaviour
     public bool Use(Vector3 forceOpposite)
     {
         if (pickUpParent.childCount <= 0) return false;
-        Destroy(pickUpParent.GetChild(Random
-            .Range(0, pickUpParent.childCount)).gameObject);
+        Destroy(pickUpParent.GetChild(Random.
+            Range(0, pickUpParent.childCount)).gameObject);
 
         var @object = Instantiate(
             prefab, _playerController.ball.position, _playerController.ball.rotation);
