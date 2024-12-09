@@ -1,5 +1,4 @@
 using BSGames.Modules.GroundCheck;
-using System.Collections;
 using UnityEngine;
 
 public static class Utils
@@ -31,32 +30,25 @@ public static class Utils
         );
     }
 
-    // Fracture a copy of an object
-    public static void SpawnFragments(this MonoBehaviour mono, Component component, float scale = 1f)
+    public static void CauseFracture(this Component self, float scale = 1f, bool copy = true)
     {
         var temp = new GameObject("Fragments");
+        var transform = self.transform;
 
-        var result = Object.Instantiate(
-            component, component.transform.position, component.transform.rotation);
+        // Fracture a copy of an object
+        self = !copy ? self : Object.Instantiate(
+            self, transform.position, transform.rotation);
 
-        result.transform.localScale =
-            component.transform.localScale * scale;
-        result.transform.parent = temp.transform;
-        result.tag = "Break";
+        self.transform.localScale = transform.localScale * scale;
+        self.transform.parent = temp.transform;
+        self.tag = "Break";
 
-        result.gameObject.GetComponent<Rigidbody>().mass /= 100f;
-        result.GetComponent<Fracture>().CauseFracture();
+        self.gameObject.GetComponent<Rigidbody>().mass /= 100f;
+        self.GetComponent<Fracture>().CauseFracture();
+        Object.Destroy(temp, 1f);
 
         // Restore position of a ground checking script
-        result.GetComponent<GroundCheck>().GroundChecker.
-            SetTransform(component.transform);
-
-        mono.StartCoroutine(DestroyFragments(temp));
-    }
-
-    private static IEnumerator DestroyFragments(GameObject @object) {
-        yield return new WaitForSeconds(1f);
-
-        Object.Destroy(@object);
+        if (self.GetComponent<GroundCheck>())
+            self.GetComponent<GroundCheck>().GroundChecker.SetTransform(transform);
     }
 }

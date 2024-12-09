@@ -73,7 +73,7 @@ public class PlayerController : MonoBehaviour
         else
         {
             _quantities.durability.Amount -= _quantities.durability.MaximumAmount / 4f;
-            this.SpawnFragments(ball, 0.5f);
+            ball.CauseFracture(0.5f);
             force /= 1.5f;
         }
         ball.AddForce(force);

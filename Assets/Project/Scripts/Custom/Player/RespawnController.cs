@@ -24,7 +24,7 @@ public class RespawnController : MonoBehaviour
         Debug.Log("Game Over!");
 
         _ball.GetComponent<CameraShaker>().Activate();
-        this.SpawnFragments(_playerController.ball);
+        _playerController.ball.CauseFracture();
 
         // Destroy all objects picked up and disable the ball itself
         _pickUps.Clear();

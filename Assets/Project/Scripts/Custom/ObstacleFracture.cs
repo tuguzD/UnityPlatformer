@@ -18,7 +18,7 @@ public class ObstacleFracture : MonoBehaviour
 
         var player = @object.CompareTag("Player") && CollisionForce(@object) > durability;
         var pickUp = @object.CompareTag("PickUp") && other.impulse.magnitude > durability / 5f;
-        if (player || pickUp) _fracture.CauseFracture();
+        if (player || pickUp) _fracture.CauseFracture(copy: false);
     }
 
     private static float CollisionForce(GameObject ball)
