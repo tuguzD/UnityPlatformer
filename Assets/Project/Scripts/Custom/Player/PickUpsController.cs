@@ -21,14 +21,14 @@ public class PickUpsController : MonoBehaviour
             Destroy(child.gameObject);
     }
 
-    public void Use(Vector3 forceOpposite)
+    public void Use(Vector3 force)
     {
         Destroy(pickUpParent.GetChild(Random.
             Range(0, pickUpParent.childCount)).gameObject);
 
         var @object = Instantiate(
             prefab, _playerController.ball.position, _playerController.ball.rotation);
-        @object.GetComponent<Rigidbody>().AddForce(forceOpposite);
+        @object.GetComponent<Rigidbody>().AddForce(force);
 
         var pickUp = @object.GetComponent<PickUpObject>();
         pickUp.Switch(false);

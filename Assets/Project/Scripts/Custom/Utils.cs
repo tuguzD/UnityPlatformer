@@ -30,7 +30,7 @@ public static class Utils
         );
     }
 
-    public static void CauseFracture(this Component self, float scale = 1f, bool copy = true)
+    public static void CauseFracture(this Component self, float fragmentScale = 1f, bool copy = true)
     {
         var temp = new GameObject("Fragments");
         var transform = self.transform;
@@ -39,13 +39,11 @@ public static class Utils
         self = !copy ? self : Object.Instantiate(
             self, transform.position, transform.rotation);
 
-        self.transform.localScale = transform.localScale * scale;
-        self.transform.parent = temp.transform;
         self.tag = "Break";
+        self.transform.localScale = transform.localScale * fragmentScale;
 
-        self.gameObject.GetComponent<Rigidbody>().mass /= 100f;
-        self.GetComponent<Fracture>().CauseFracture();
-        Object.Destroy(temp, 1f);
+        self.transform.SetParent(temp.transform);
+        temp.AddComponent<ScaleFractured>();
 
         // Restore position of a ground checking script
         if (self.GetComponent<GroundCheck>())

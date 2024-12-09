@@ -64,19 +64,19 @@ public class PlayerController : MonoBehaviour
     private void Shoot(Vector2 input)
     {
         // Change #4: make force uniform, or dependent only on direction of user input
-        var force = new Vector3(input.x, input.y, input.y).normalized *
-            (15f * speedup * _quantities.velocity.MinimumAmount);
+        var force = new Vector3(input.x, input.y, input.y).
+            normalized * (speedup * _quantities.velocity.MinimumAmount);
+        var anyPickUps = _pickUps.pickUpParent.childCount > 0;
 
         // Change #5: spawn pick-up with an opposite force (Newton's Third Law)...
-        if (_pickUps.pickUpParent.childCount > 0) _pickUps.Use(-force);
+        if (anyPickUps) _pickUps.Use(-force);
         // ...or consume ball's durability for a weaker impulse
         else
         {
-            _quantities.durability.Amount -= _quantities.durability.MaximumAmount / 4f;
             ball.CauseFracture(0.5f);
-            force /= 1.5f;
+            _quantities.durability.Amount -= _quantities.durability.MaximumAmount / 4f;
         }
-        ball.AddForce(force);
+        ball.AddForce(force * (anyPickUps ? 15 : 10));
     }
 
     /* Use new input system with examples borrowed from:
