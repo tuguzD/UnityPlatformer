@@ -36,12 +36,28 @@ public class PlayerController : MonoBehaviour
     // Change #1: use new input system instead of consuming mouse pointer position
     private void CachePosition(InputAction.CallbackContext context)
     {
-        _cachedPosition = _input.Game.Position.ReadValue<Vector2>();
+        var position = _input.Game.Position.ReadValue<Vector2>();
+        var ray = GetComponent<PlayerInput>().camera.ScreenPointToRay(position);
+
+        if (Physics.Raycast(ray, out var hit, int.MaxValue, ~0,
+            QueryTriggerInteraction.Ignore) && hit.collider.CompareTag("Player"))
+        {
+            _cachedPosition = _input.Game.Position.ReadValue<Vector2>();
+            Debug.DrawLine(ray.origin, hit.point, Color.green, 5f);
+            Debug.Log("SUCCESS!!!");
+        }
+        else
+        {
+            _cachedPosition = Vector2.zero;
+            Debug.DrawLine(ray.origin, hit.point, Color.red, 5f);
+        }
     }
 
     private void UseCachedPosition(InputAction.CallbackContext context)
     {
+        if (_cachedPosition == Vector2.zero) return;
         var difference = _cachedPosition - _input.Game.Position.ReadValue<Vector2>();
+
         // Change #2: prevent shooting if the input is too small to prevent loosing pick-ups
         if (!Mathf.Approximately(Mathf.Abs(difference.magnitude), Mathf.Epsilon))
             Shoot(difference);
