@@ -1,4 +1,4 @@
-// Total changes: 6
+// Total changes: 7
 
 using BSGames.Modules.GroundCheck;
 using Ditzelgames;
@@ -30,27 +30,25 @@ public class PlayerController : MonoBehaviour
     
     /* Source of code below:
      * https://gist.github.com/seferciogluecce/e57dd9e884bd38d2925f3de7826f5dd4 */
-    // Total changes: 3
+    // Total changes: 5
     private Vector2 _cachedPosition;
 
-    // Change #1: use new input system instead of consuming mouse pointer position
     private void CachePosition(InputAction.CallbackContext context)
     {
+        // Change #1: use new input system instead of consuming mouse pointer position
         var position = _input.Game.Position.ReadValue<Vector2>();
-        var ray = GetComponent<PlayerInput>().camera.ScreenPointToRay(position);
 
-        if (Physics.Raycast(ray, out var hit, int.MaxValue, ~0,
-            QueryTriggerInteraction.Ignore) && hit.collider.CompareTag("Player"))
-        {
-            _cachedPosition = _input.Game.Position.ReadValue<Vector2>();
-            Debug.DrawLine(ray.origin, hit.point, Color.green, 5f);
-            Debug.Log("SUCCESS!!!");
-        }
-        else
-        {
-            _cachedPosition = Vector2.zero;
-            Debug.DrawLine(ray.origin, hit.point, Color.red, 5f);
-        }
+        // Change #2: allow player to only hit its ball to initiate shooting
+        var ray = GetComponent<PlayerInput>().camera.ScreenPointToRay(position);
+        var rayCast = Physics.Raycast(
+            ray, out var hit, int.MaxValue,
+            ~0, QueryTriggerInteraction.Ignore);
+
+        var condition = rayCast && hit.collider.CompareTag("Player");
+        _cachedPosition = condition ? position : Vector2.zero;
+
+        Debug.DrawLine(ray.origin, hit.point, duration: 5f,
+            color: condition ? Color.green : Color.red);
     }
 
     private void UseCachedPosition(InputAction.CallbackContext context)
@@ -58,18 +56,18 @@ public class PlayerController : MonoBehaviour
         if (_cachedPosition == Vector2.zero) return;
         var difference = _cachedPosition - _input.Game.Position.ReadValue<Vector2>();
 
-        // Change #2: prevent shooting if the input is too small to prevent loosing pick-ups
+        // Change #3: prevent shooting if the input is too small to prevent loosing pick-ups
         if (!Mathf.Approximately(Mathf.Abs(difference.magnitude), Mathf.Epsilon))
             Shoot(difference);
     }
 
     private void Shoot(Vector2 input)
     {
-        // Change #3: make force uniform, or dependent only on direction of user input
+        // Change #4: make force uniform, or dependent only on direction of user input
         var force = new Vector3(input.x, input.y, input.y).normalized *
             (15f * speedup * _quantities.velocity.MinimumAmount);
 
-        // Change #4: try spawning pick-up with an opposite force (Newton's Third Law)
+        // Change #5: try spawning pick-up with an opposite force (Newton's Third Law)
         if (_pickUps.Use(-force)) ball.AddForce(force);
     }
 
