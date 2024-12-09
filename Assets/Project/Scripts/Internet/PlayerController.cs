@@ -67,8 +67,16 @@ public class PlayerController : MonoBehaviour
         var force = new Vector3(input.x, input.y, input.y).normalized *
             (15f * speedup * _quantities.velocity.MinimumAmount);
 
-        // Change #5: try spawning pick-up with an opposite force (Newton's Third Law)
-        if (_pickUps.Use(-force)) ball.AddForce(force);
+        // Change #5: spawn pick-up with an opposite force (Newton's Third Law)...
+        if (_pickUps.pickUpParent.childCount > 0) _pickUps.Use(-force);
+        // ...or consume ball's durability for a weaker impulse
+        else
+        {
+            _quantities.durability.Amount -= _quantities.durability.MaximumAmount / 4f;
+            ball.SpawnFragments(0.5f);
+            force /= 1.5f;
+        }
+        ball.AddForce(force);
     }
 
     /* Use new input system with examples borrowed from:

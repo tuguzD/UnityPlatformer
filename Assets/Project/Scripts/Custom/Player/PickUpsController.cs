@@ -21,9 +21,8 @@ public class PickUpsController : MonoBehaviour
             Destroy(child.gameObject);
     }
 
-    public bool Use(Vector3 forceOpposite)
+    public void Use(Vector3 forceOpposite)
     {
-        if (pickUpParent.childCount <= 0) return false;
         Destroy(pickUpParent.GetChild(Random.
             Range(0, pickUpParent.childCount)).gameObject);
 
@@ -34,8 +33,6 @@ public class PickUpsController : MonoBehaviour
         var pickUp = @object.GetComponent<PickUpObject>();
         pickUp.Switch(false);
         StartCoroutine(pickUp.Enable());
-
-        return true;
     }
 
     private QuantityController _quantities;
