@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class SpikinessController : MonoBehaviour
 {
-    public float pieceToSpikinessMultiplier = 0.1f;
+    public float onePieceMultiplier = 0.1f;
 
     private QuantityController _quantities;
 
@@ -18,7 +18,7 @@ public class SpikinessController : MonoBehaviour
     {
         var spikiness = _quantities.spikiness;
 
-        spikiness.MinimumAmount = _quantities.pieces.Amount * pieceToSpikinessMultiplier;
+        spikiness.MinimumAmount = _quantities.pieces.Amount * onePieceMultiplier;
         spikiness.MaximumAmount = 1 + spikiness.MinimumAmount;
 
         this.UniformScale(_spikeScale.Lerp(spikiness.FillAmount));
