@@ -2918,6 +2918,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8d4b9ffc44e47ee902321dbd3afd4bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  respawnTime: 3
   killHeight: -5
 --- !u!114 &2691374847498297769
 MonoBehaviour:
@@ -3005,6 +3006,8 @@ MonoBehaviour:
   ball: {fileID: 1333073185178226399}
   groundChecker: {fileID: 2128082178890900813}
   speedup: 7.5
+  fullImpulsePower: 15
+  fractureImpulsePower: 10
 --- !u!114 &7409395575140995745
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3066,7 +3069,7 @@ Transform:
   m_GameObject: {fileID: 7562962936408140821}
   serializedVersion: 2
   m_LocalRotation: {x: 0.17364827, y: -0, z: -0, w: 0.9848077}
-  m_LocalPosition: {x: 0, y: 8.5, z: -8}
+  m_LocalPosition: {x: 0, y: 9.5, z: -9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3152,7 +3155,7 @@ MonoBehaviour:
   follow: {fileID: 178567492801604182}
   lookAt: {fileID: 0}
   turnSpeed: 1
-  followOffset: {x: 0, y: 8, z: -8}
+  followOffset: {x: 0, y: 9, z: -9}
   shakeSmoothing: 1
   positionMagnitude: 7.5
   rotationMagnitude: 5
