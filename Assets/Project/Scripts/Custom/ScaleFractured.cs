@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ScaleFractured : MonoBehaviour
+public class ScaleFractured : ScaleToDestroy
 {
     private void Start()
     {
@@ -13,7 +13,7 @@ public class ScaleFractured : MonoBehaviour
         foreach (Transform _ in gameObject.transform)
             foreach (Transform child in _)
             {
-                child.transform.localScale -= Vector3.one / 1000f;
+                child.transform.localScale -= Vector3.one * speed;
                 if (child.transform.localScale.x <= 0f)
                     Destroy(gameObject);
             }
