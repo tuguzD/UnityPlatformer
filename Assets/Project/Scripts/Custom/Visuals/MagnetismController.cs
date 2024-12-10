@@ -4,18 +4,10 @@ public class MagnetismController : MonoBehaviour
 {
     [SerializeField] private MeshRenderer forceField;
 
-    private QuantityController _quantities;
-
-    private readonly Range
-        _fieldOpacity = new(min: .0f, max: .05f);
-
-    private readonly Range
-        _fieldScale = new(min: 0f, max: 2f);
-
-    private void Start()
-    {
-        _quantities = GetComponentInParent<QuantityController>();
-    }
+    private readonly Range _fieldOpacity =
+        new(min: .0f, max: .05f);
+    private readonly Range _fieldScale =
+        new(min: 0f, max: 2f);
 
     private void FixedUpdate()
     {
@@ -24,5 +16,28 @@ public class MagnetismController : MonoBehaviour
         foreach (var material in forceField.materials)
             material.SetOpacity(_fieldOpacity.Lerp(magnetisation));
         forceField.UniformScale(_fieldScale.Lerp(magnetisation));
+
+        DefyGravity(magnetisation, _playerController.ball);
+    }
+
+    [SerializeField] private float gravityModifier = 0.375f;
+
+    private void DefyGravity(float magnetisation, Rigidbody body)
+    {
+        var modifier = magnetisation < 0.9f
+            ? magnetisation * gravityModifier * 1.25f
+            : magnetisation + gravityModifier;
+        var force = -Physics.gravity * body.mass;
+
+        body.AddForce(force * modifier);
+    }
+
+    private QuantityController _quantities;
+    private PlayerController _playerController;
+
+    private void Start()
+    {
+        _quantities = GetComponentInParent<QuantityController>();
+        _playerController = GetComponentInParent<PlayerController>();
     }
 }
