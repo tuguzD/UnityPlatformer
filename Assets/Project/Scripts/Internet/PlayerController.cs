@@ -1,4 +1,4 @@
-// Total changes: 7
+// Total changes: 8
 
 using BSGames.Modules.GroundCheck;
 using Ditzelgames;
@@ -10,9 +10,10 @@ public class PlayerController : MonoBehaviour
     /* Source of code below:
      * https://www.youtube.com/watch?v=FsYI9D3aukY&list=PLD8pFQ5A8vv6U4Sm0JKdcNGGOOZNoX2lv&index=2 */
     // Total changes: 2
-    [Header("Physics")]
     public Rigidbody ball;
     public GroundCheck groundChecker;
+    
+    [Header("Movement")]
     [SerializeField] private float speedup = 7.5f;
 
     private void FixedUpdate()
@@ -30,7 +31,10 @@ public class PlayerController : MonoBehaviour
     
     /* Source of code below:
      * https://gist.github.com/seferciogluecce/e57dd9e884bd38d2925f3de7826f5dd4 */
-    // Total changes: 5
+    // Total changes: 6
+    [Header("Impulse")]
+    [SerializeField] private float fullImpulsePower = 15.0f;
+    [SerializeField] private float fractureImpulsePower = 10.0f;
     private Vector2 _cachedPosition;
 
     private void CachePosition(InputAction.CallbackContext context)
@@ -69,14 +73,21 @@ public class PlayerController : MonoBehaviour
         var anyPickUps = _pickUps.pickUpParent.childCount > 0;
 
         // Change #5: spawn pick-up with an opposite force (Newton's Third Law)...
-        if (anyPickUps) _pickUps.Use(-force);
+        if (anyPickUps) _pickUps.Use(-force * fullImpulsePower);
         // ...or consume ball's durability for a weaker impulse
         else
         {
             ball.CauseFracture(0.5f);
             _quantities.durability.Amount -= _quantities.durability.MaximumAmount / 4f;
         }
-        ball.AddForce(force * (anyPickUps ? 15 : 10));
+        ball.AddForce(force * (anyPickUps ? fullImpulsePower : fractureImpulsePower));
+    }
+
+    // Change #6: cancel shooting if player ball isn't active
+    private void Update()
+    {
+        if (!ball.gameObject.activeInHierarchy)
+            _cachedPosition = Vector2.zero;
     }
 
     /* Use new input system with examples borrowed from:
