@@ -78,6 +78,8 @@ public class PlayerController : MonoBehaviour
         else
         {
             ball.CauseFracture(0.5f);
+            ball.UniformScale(ball.transform.localScale.x - 0.05f);
+
             _quantities.durability.Amount -= _quantities.durability.MaximumAmount / 4f;
         }
         ball.AddForce(force * (anyPickUps ? fullImpulsePower : fractureImpulsePower));
