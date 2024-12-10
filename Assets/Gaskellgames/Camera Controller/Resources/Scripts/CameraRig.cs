@@ -54,7 +54,7 @@ namespace Gaskellgames.CameraController
         private float turnSpeed = 1.0f;
         
         [SerializeField]
-        private Vector3 followOffset;
+        public Vector3 followOffset;
         
         [SerializeField, LineSeparator, Range(0, 1)]
         [Tooltip("Smoothing value effects the fade time of the shake effect")]

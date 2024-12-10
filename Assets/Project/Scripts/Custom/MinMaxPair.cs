@@ -1,16 +1,23 @@
+using UnityEngine;
+
 public readonly struct MinMaxPair
 {
-    private readonly float _minimum;
-    private readonly float _maximum;
+    public readonly float Minimum;
+    public readonly float Maximum;
 
     public MinMaxPair(float min = 0f, float max = 1f)
     {
-        _minimum = min;
-        _maximum = max;
+        Minimum = min;
+        Maximum = max;
     }
 
     public float Scaled(float value)
     {
-        return _minimum + value * (_maximum - _minimum);
+        return Mathf.Lerp(Minimum, Maximum, value);
+    }
+
+    public float InverseLerp(float value)
+    {
+        return Mathf.InverseLerp(Minimum, Maximum, value);
     }
 }
