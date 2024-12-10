@@ -33,22 +33,19 @@ public class PickUpsController : MonoBehaviour
     {
         yield return new WaitForSeconds(1);
         if (!component) yield break;
-        
+
         var ball = _playerController.ball;
         ball.UniformScale(ball.transform.localScale.x + component.MeshSize());
+
         Destroy(component.gameObject);
-        
-        // TODO: fix on consumption
-        _quantities.spikiness.Amount -= _spikes.onePieceMultiplier;
+        _spikes.ReduceQuantity();
     }
 
     public void Use(Vector3 force)
     {
         Destroy(pickUpParent.GetChild(Random.
             Range(0, pickUpParent.childCount)).gameObject);
-
-        // TODO: fix on first pick-up
-        _quantities.spikiness.Amount -= _spikes.onePieceMultiplier;
+        _spikes.ReduceQuantity();
 
         var @object = Instantiate(
             prefab, _playerController.ball.position, _playerController.ball.rotation);
