@@ -25,6 +25,10 @@ public class PickUpsController : MonoBehaviour
     {
         Destroy(pickUpParent.GetChild(Random.
             Range(0, pickUpParent.childCount)).gameObject);
+        
+        // TODO: fix on first pick-up
+        _quantities.spikiness.Amount -= GetComponent<PlayerController>().GetComponentInChildren
+            <SpikinessController>().pieceToSpikinessMultiplier;
 
         var @object = Instantiate(
             prefab, _playerController.ball.position, _playerController.ball.rotation);

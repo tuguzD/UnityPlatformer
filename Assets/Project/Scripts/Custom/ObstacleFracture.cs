@@ -29,10 +29,8 @@ public class ObstacleFracture : MonoBehaviour
         var mass = quantities.size.Amount;
         var velocity = quantities.velocity.Amount;
         var spikiness = 1 + quantities.spikiness.Amount;
-
-        var x = quantities.plasticity.Amount;
-        // how well energy is transferred to the object - the closer it is to average, the better
-        var plasticity = 0.5f + (x < 0.5 ? 2*x : 2*(1 - x));
+        var plasticity = Range.MiddleInterpolation(
+            quantities.plasticity.FillAmount);
 
         var result = mass * velocity * spikiness * plasticity;
         Debug.Log($"{mass} * {velocity} * {spikiness} * {plasticity} = {result}");

@@ -8,43 +8,43 @@ public class BallCameraRig : MonoBehaviour
     private const float DeltaZ = -2;
     [SerializeField] private float rotationX = 20f;
 
-    [LabelOverride("Top surface height")]
-    [SerializeField] private float heightSurfaceTop = 17.32f;
+    [LabelOverride("Top surface height")] [SerializeField]
+    private float heightSurfaceTop = 17.32f;
 
-    private MinMaxPair _positionRangeY, _rotationRange, _heightMiddle;
+    private Range _positionRangeY, _rotationRange, _heightMiddle;
 
     private void FixedUpdate()
     {
         var height = _playerController.ball.position.y;
-        if (height > _heightMiddle.Minimum && height < _heightMiddle.Maximum)
-        {
-            var cameraRig = GetComponentInChildren<CameraRig>();
-            var cameraObject = cameraRig.gameObject;
 
-            var ratio = _heightMiddle.InverseLerp(height);
+        if (!_heightMiddle.Includes(height)) return;
+        var ratio = _heightMiddle.InverseLerp(height);
 
-            cameraRig.followOffset.y = _positionRangeY.Scaled(ratio);
-            cameraObject.transform.localEulerAngles = new Vector3(
-                _rotationRange.Scaled(ratio),
-                cameraObject.transform.localEulerAngles.y,
-                cameraObject.transform.localEulerAngles.z
-            );
+        _cameraRig.followOffset = new Vector3(
+            x: _cameraRig.followOffset.x,
+            y: _positionRangeY.Lerp(ratio),
+            z: position.z + (DeltaZ * Range.MiddleInterpolation(ratio))
+        );
 
-            var ratioMiddle = ratio < 0.5 ? 2 * ratio : 2 * (1 - ratio);
-            cameraRig.followOffset.z = position.z + (DeltaZ * ratioMiddle);
-        }
+        _cameraRig.transform.localEulerAngles = new Vector3(
+            x: _rotationRange.Lerp(ratio),
+            y: _cameraRig.transform.localEulerAngles.y,
+            z: _cameraRig.transform.localEulerAngles.z
+        );
     }
 
+    private CameraRig _cameraRig;
     private PlayerController _playerController;
 
     private void Start()
     {
+        _cameraRig = GetComponentInChildren<CameraRig>();
         _playerController = GetComponent<PlayerController>();
 
         var localPosition = _playerController.ball.transform.localPosition.y;
-        _heightMiddle = new MinMaxPair(0 + localPosition, heightSurfaceTop - localPosition);
+        _heightMiddle = new Range(0 + localPosition, heightSurfaceTop - localPosition);
 
-        _positionRangeY = new MinMaxPair(position.y, -position.y);
-        _rotationRange = new MinMaxPair(rotationX, -rotationX);
+        _positionRangeY = new Range(position.y, -position.y);
+        _rotationRange = new Range(rotationX, -rotationX);
     }
 }

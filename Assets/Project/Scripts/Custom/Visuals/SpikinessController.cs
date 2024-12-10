@@ -6,7 +6,7 @@ public class SpikinessController : MonoBehaviour
 
     private QuantityController _quantities;
 
-    private readonly MinMaxPair
+    private readonly Range
         _spikeScale = new(min: 295, max: 385);
 
     private void Start()
@@ -21,6 +21,6 @@ public class SpikinessController : MonoBehaviour
         spikiness.MinimumAmount = _quantities.pieces.Amount * pieceToSpikinessMultiplier;
         spikiness.MaximumAmount = 1 + spikiness.MinimumAmount;
 
-        this.UniformScale(_spikeScale.Scaled(spikiness.FillAmount));
+        this.UniformScale(_spikeScale.Lerp(spikiness.FillAmount));
     }
 }

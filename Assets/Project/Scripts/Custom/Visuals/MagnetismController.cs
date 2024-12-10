@@ -6,10 +6,10 @@ public class MagnetismController : MonoBehaviour
 
     private QuantityController _quantities;
 
-    private readonly MinMaxPair
+    private readonly Range
         _fieldOpacity = new(min: .0f, max: .05f);
 
-    private readonly MinMaxPair
+    private readonly Range
         _fieldScale = new(min: 0f, max: 2f);
 
     private void Start()
@@ -22,7 +22,7 @@ public class MagnetismController : MonoBehaviour
         var magnetisation = _quantities.magnetisation.FillAmount;
 
         foreach (var material in forceField.materials)
-            material.SetOpacity(_fieldOpacity.Scaled(magnetisation));
-        forceField.UniformScale(_fieldScale.Scaled(magnetisation));
+            material.SetOpacity(_fieldOpacity.Lerp(magnetisation));
+        forceField.UniformScale(_fieldScale.Lerp(magnetisation));
     }
 }

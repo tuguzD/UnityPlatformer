@@ -11,15 +11,15 @@ public class TemperatureController : MonoBehaviour
 
     [SerializeField] private MeshRenderer ballSpike;
 
-    [Header("Ice Coverage")] private readonly MinMaxPair
+    [Header("Ice Coverage")] private readonly Range
         _iceCoverage = new(min: 0f, max: 0.2f);
-    [Header("Ice Roughness")] private readonly MinMaxPair
+    [Header("Ice Roughness")] private readonly Range
         _iceRoughness = new(min: 0f, max: 4f);
 
     private Material _iceCoverSpikes;
     private Material _iceCoverBall;
 
-    [Header("Hot Glowing")] private readonly MinMaxPair
+    [Header("Hot Glowing")] private readonly Range
         _glowPower = new(min: 0f, max: 0.05f);
 
     private Material _hotGlowSpikes;
@@ -51,10 +51,10 @@ public class TemperatureController : MonoBehaviour
         if (temperature < 0)
         {
             hotColor *= 0f;
-            iceOpacity = _iceCoverage.Scaled(-1 * temperature);
-            iceRoughness = _iceRoughness.Scaled(-1 * temperature);
+            iceOpacity = _iceCoverage.Lerp(-1 * temperature);
+            iceRoughness = _iceRoughness.Lerp(-1 * temperature);
         }
-        else hotColor *= _glowPower.Scaled(temperature);
+        else hotColor *= _glowPower.Lerp(temperature);
 
         _iceCoverBall.SetOpacity(iceOpacity);
         _iceCoverBall.SetFloat(NormalMapScale, iceRoughness);
