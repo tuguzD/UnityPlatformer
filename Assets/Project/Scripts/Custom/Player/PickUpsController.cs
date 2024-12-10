@@ -47,11 +47,11 @@ public class PickUpsController : MonoBehaviour
             Range(0, pickUpParent.childCount)).gameObject);
         _spikes.ReduceQuantity();
 
-        var @object = Instantiate(
-            prefab, _playerController.ball.position, _playerController.ball.rotation);
-        @object.GetComponent<Rigidbody>().AddForce(force);
+        var ball = _playerController.ball;
+        var prefabObject = Instantiate(prefab, ball.position, ball.rotation);
+        prefabObject.GetComponent<Rigidbody>().AddForce(force);
 
-        var pickUp = @object.GetComponent<PickUpObject>();
+        var pickUp = prefabObject.GetComponent<PickUpObject>();
         pickUp.Switch(false);
         StartCoroutine(pickUp.Enable());
     }
