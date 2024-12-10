@@ -15,19 +15,13 @@ public class PickUpsController : MonoBehaviour
         pickUp.GetComponent<MagneticTool>().IsStatic = true;
     }
 
-    public void Clear()
-    {
-        foreach (Transform child in pickUpParent)
-            Destroy(child.gameObject);
-    }
-
     public void Use(Vector3 force)
     {
         Destroy(pickUpParent.GetChild(Random.
             Range(0, pickUpParent.childCount)).gameObject);
-        
+
         // TODO: fix on first pick-up
-        _quantities.spikiness.Amount -= GetComponent<PlayerController>().GetComponentInChildren
+        _quantities.spikiness.Amount -= _playerController.GetComponentInChildren
             <SpikinessController>().pieceToSpikinessMultiplier;
 
         var @object = Instantiate(
@@ -37,6 +31,12 @@ public class PickUpsController : MonoBehaviour
         var pickUp = @object.GetComponent<PickUpObject>();
         pickUp.Switch(false);
         StartCoroutine(pickUp.Enable());
+    }
+
+    public void Clear()
+    {
+        foreach (Transform child in pickUpParent)
+            Destroy(child.gameObject);
     }
 
     private QuantityController _quantities;

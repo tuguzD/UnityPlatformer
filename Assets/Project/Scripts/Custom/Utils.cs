@@ -46,7 +46,7 @@ public static class Utils
         temp.AddComponent<ScaleFractured>();
 
         // Restore position of a ground checking script
-        if (self.GetComponent<GroundCheck>())
-            self.GetComponent<GroundCheck>().GroundChecker.SetTransform(transform);
+        if (self.TryGetComponent(out GroundCheck check))
+            check.GroundChecker.SetTransform(transform);
     }
 }
