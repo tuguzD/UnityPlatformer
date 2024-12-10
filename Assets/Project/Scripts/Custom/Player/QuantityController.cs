@@ -23,8 +23,8 @@ public class QuantityController : MonoBehaviour
         velocity.Amount = _playerController.ball.velocity.z;
         pieces.Amount = _pickUps.pickUpParent.childCount;
 
-        size.Amount = _playerController.ball.MeshSize() * _playerController.ball.Scale()
-            + _pickUps.pickUpParent.GetComponentsInChildren<PickUpObject>().Sum(Utils.MeshSize);
+        var ball = _playerController.ball;
+        size.Amount = ball.MeshSize() * ball.Scale() + _pickUps.ChildrenMeshSize();
     }
 
     public void Restore()
