@@ -40,7 +40,7 @@ public static class Utils
             self, transform.position, transform.rotation);
 
         self.tag = "Break";
-        self.transform.localScale = transform.localScale * fragmentScale;
+        self.transform.localScale *= fragmentScale;
 
         self.transform.SetParent(temp.transform);
         temp.AddComponent<ScaleFractured>();
