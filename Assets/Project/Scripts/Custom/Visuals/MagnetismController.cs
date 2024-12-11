@@ -24,7 +24,7 @@ public class MagnetismController : MonoBehaviour
 
     private void DefyGravity(float magnetisation, Rigidbody body)
     {
-        var modifier = magnetisation < 0.9f
+        var modifier = _quantities.temperature.Amount > -0.75f
             ? magnetisation * gravityModifier * 1.25f
             : magnetisation + gravityModifier;
         var force = -Physics.gravity * body.mass;

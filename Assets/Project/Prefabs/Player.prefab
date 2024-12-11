@@ -2922,7 +2922,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   respawnTime: 3
-  killHeight: -5
+  killHeight: -3.4028235e+38
 --- !u!114 &2691374847498297769
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3554,7 +3554,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23d3735301c14969b3e45f7973aa4ae2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pieceToSpikinessMultiplier: 0.1
+  onePieceMultiplier: 0.1
 --- !u!23 &3966932671243585988 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: df52556f0b0a63c4ebae12a6553c0b7d,

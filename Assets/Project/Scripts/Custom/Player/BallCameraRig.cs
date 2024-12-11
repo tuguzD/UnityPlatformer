@@ -9,7 +9,7 @@ public class BallCameraRig : MonoBehaviour
     [SerializeField] private float rotationX = 20f;
 
     [LabelOverride("Top surface height")] [SerializeField]
-    private float heightSurfaceTop = 17.32f;
+    public float heightSurfaceTop = 17.32f;
 
     private Range _positionRangeY, _rotationRange, _heightMiddle;
 

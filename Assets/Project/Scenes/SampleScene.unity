@@ -4523,7 +4523,7 @@ MonoBehaviour:
   checkPoints:
   - cpc: {fileID: 1878938965}
     isActive: 1
-    position: {x: 0, y: 2, z: 0}
+    position: {x: 0, y: 9, z: 0}
     bounds:
       m_Center: {x: 0, y: 0, z: 0}
       m_Extent: {x: 5, y: 3, z: 1}

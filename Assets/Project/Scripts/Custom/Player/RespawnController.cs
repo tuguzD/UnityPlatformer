@@ -6,7 +6,7 @@ using UnityEngine;
 public class RespawnController : MonoBehaviour
 {
     public float respawnTime = 3f;
-    public float killHeight = -5f;
+    public float killHeight = -float.MaxValue;
 
     private void Update()
     {
@@ -36,12 +36,13 @@ public class RespawnController : MonoBehaviour
     private IEnumerator Respawn()
     {
         yield return new WaitForSeconds(respawnTime);
-
-        // Enable player ball back and teleport it to checkpoint
         _ball.SetActive(true);
-        _checkPoints.TeleportToRecentlyActivated(_ball);
 
-        _quantities.Restore();
+        // Teleport player ball back to checkpoint
+        var checkpoint = _checkPoints.GetRecentlyActivatedCheckpoint();
+        _checkPoints.TeleportToCheckpoint(checkpoint.GetIndex(), _ball);
+
+        _quantities.Restore(checkpoint.GetPosition().y);
     }
 
     private PlayerController _playerController;

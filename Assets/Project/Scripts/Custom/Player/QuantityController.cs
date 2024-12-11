@@ -1,5 +1,4 @@
 using Minimalist.Quantity;
-using System.Linq;
 using UnityEngine;
 
 public class QuantityController : MonoBehaviour
@@ -27,7 +26,7 @@ public class QuantityController : MonoBehaviour
         size.Amount = ball.MeshSize() * ball.Scale() + _pickUps.ChildrenMeshSize();
     }
 
-    public void Restore()
+    public void Restore(float position)
     {
         // Restore initial ball spikiness
         spikiness.MinimumAmount = 0f;
@@ -35,7 +34,8 @@ public class QuantityController : MonoBehaviour
         spikiness.FillAmount = 0f;
 
         // Restore ball temperature and durability
-        temperature.FillAmount = 0.5f;
+        temperature.FillAmount = position >= GetComponent<BallCameraRig>().
+            heightSurfaceTop / 2f ? 0f : 0.5f;
         durability.FillAmount = 1f;
 
         // Restore player ball size and velocity
