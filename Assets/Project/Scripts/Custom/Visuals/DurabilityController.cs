@@ -42,7 +42,7 @@ public class DurabilityController : MonoBehaviour
         // max plasticity equals min brittleness, and vice versa
         var brittleness = 1 - _quantities.plasticity.Amount;
 
-        var result = velocity * brittleness / mass;
+        var result = (velocity / 1.5f) * brittleness / mass;
         return result;
     }
 }
