@@ -2922,7 +2922,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   respawnTime: 3
-  killHeight: -3.4028235e+38
+  killHeight: -5
 --- !u!114 &2691374847498297769
 MonoBehaviour:
   m_ObjectHideFlags: 0
