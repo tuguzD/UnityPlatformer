@@ -1080,7 +1080,7 @@ PrefabInstance:
       value: '{"declarations":{"Kind":"Object","collection":{"$content":[{"name":"Friction
         Type","value":{"$content":"None","$type":"Minimalist.Quantity.QuantityDynamicsType"},"typeHandle":{"Identification":"Minimalist.Quantity.QuantityDynamicsType,
         Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"Temperature
-        Type","value":{"$content":"Accumulation","$type":"Minimalist.Quantity.QuantityDynamicsType"},"typeHandle":{"Identification":"Minimalist.Quantity.QuantityDynamicsType,
+        Type","value":{"$content":"None","$type":"Minimalist.Quantity.QuantityDynamicsType"},"typeHandle":{"Identification":"Minimalist.Quantity.QuantityDynamicsType,
         Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"Collider","value":{"$content":0,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"UnityEngine.MeshCollider,
         UnityEngine.PhysicsModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"Magnetism","value":{"$content":1,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"MagneticTool,
         Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"}],"$version":"A"},"$version":"A"}}'
@@ -1421,7 +1421,7 @@ PrefabInstance:
       value: '{"declarations":{"Kind":"Object","collection":{"$content":[{"name":"Friction
         Type","value":{"$content":"None","$type":"Minimalist.Quantity.QuantityDynamicsType"},"typeHandle":{"Identification":"Minimalist.Quantity.QuantityDynamicsType,
         Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"Temperature
-        Type","value":{"$content":"Depletion","$type":"Minimalist.Quantity.QuantityDynamicsType"},"typeHandle":{"Identification":"Minimalist.Quantity.QuantityDynamicsType,
+        Type","value":{"$content":"None","$type":"Minimalist.Quantity.QuantityDynamicsType"},"typeHandle":{"Identification":"Minimalist.Quantity.QuantityDynamicsType,
         Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"Collider","value":{"$content":0,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"UnityEngine.MeshCollider,
         UnityEngine.PhysicsModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"Magnetism","value":{"$content":1,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"MagneticTool,
         Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"}],"$version":"A"},"$version":"A"}}'
