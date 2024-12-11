@@ -18,9 +18,14 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        var range = _quantities.velocity;
+        var speed = ball.velocity;
+
         // Change #1: set minimum speed if it's too low
-        if (ball.velocity.z < _quantities.velocity.MinimumAmount) PhysicsHelper.ApplyForceToReachVelocity(
-            velocity: Vector3.forward * _quantities.velocity.MinimumAmount, rigidbody: ball, force: float.MaxValue);
+        if (speed.z < range.MinimumAmount) PhysicsHelper.ApplyForceToReachVelocity(
+            velocity: Vector3.forward * range.MinimumAmount, rigidbody: ball, force: float.MaxValue);
+        // set maximum speed: https://discussions.unity.com/t/limiting-rigidbody-speed/44191/2
+        if (speed.z > range.MaximumAmount) ball.velocity = speed.normalized * range.MaximumAmount;
 
         // Change #2: disable input movement if not grounded
         if (!groundChecker.IsGrounded()) return;

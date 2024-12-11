@@ -1941,17 +1941,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _units: V
-  _maximumAmount: 200
+  _maximumAmount: 30
   _minimumAmount: 5
-  _capacity: 195
+  _capacity: 25
   _currentAmount: 5
-  _deltaAmount: 0
+  _deltaAmount: 2
   _fillAmount: 0
   _passiveDynamics:
     _type: 0
     _deltaAmountType: 0
     _deltaPercentage: 1
-    _deltaAmount: 1
+    _deltaAmount: 0.00999999
     _deltaTime: 0.5
     _enabled: 1
   _onNameChanged:
