@@ -29,13 +29,17 @@ public class RespawnController : MonoBehaviour
         // Destroy all objects picked up and disable the ball itself
         _pickUps.Clear();
         _ball.SetActive(false);
-
-        StartCoroutine(Respawn());
+        StartCoroutine(RespawnCoroutine());
     }
 
-    private IEnumerator Respawn()
+    private IEnumerator RespawnCoroutine()
     {
         yield return new WaitForSeconds(respawnTime);
+        Respawn();
+    }
+    
+    private void Respawn()
+    {
         _ball.SetActive(true);
 
         // Teleport player ball back to checkpoint
@@ -60,5 +64,8 @@ public class RespawnController : MonoBehaviour
 
         _quantities = GetComponent<QuantityController>();
         _ball = GetComponent<PlayerController>().ball.gameObject;
+
+        _ball.SetActive(false);
+        Respawn();
     }
 }
