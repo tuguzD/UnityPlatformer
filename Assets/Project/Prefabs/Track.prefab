@@ -1320,11 +1320,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -119.73
       objectReference: {fileID: 0}
-    - target: {fileID: 2236923945742107661, guid: f0ad154101fddbb42bce08a04fc7a72f,
-        type: 3}
-      propertyPath: turnOnMagnetism
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4520024211673450512, guid: f0ad154101fddbb42bce08a04fc7a72f,
         type: 3}
       propertyPath: m_IsActive
@@ -1778,11 +1773,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -119.73
       objectReference: {fileID: 0}
-    - target: {fileID: 2236923945742107661, guid: f0ad154101fddbb42bce08a04fc7a72f,
-        type: 3}
-      propertyPath: turnOnMagnetism
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4520024211673450512, guid: f0ad154101fddbb42bce08a04fc7a72f,
         type: 3}
       propertyPath: m_IsActive
@@ -2115,11 +2105,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -119.73
-      objectReference: {fileID: 0}
-    - target: {fileID: 2236923945742107661, guid: f0ad154101fddbb42bce08a04fc7a72f,
-        type: 3}
-      propertyPath: turnOnMagnetism
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4520024211673450512, guid: f0ad154101fddbb42bce08a04fc7a72f,
         type: 3}
@@ -2572,11 +2557,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -119.73
-      objectReference: {fileID: 0}
-    - target: {fileID: 2236923945742107661, guid: f0ad154101fddbb42bce08a04fc7a72f,
-        type: 3}
-      propertyPath: turnOnMagnetism
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4520024211673450512, guid: f0ad154101fddbb42bce08a04fc7a72f,
         type: 3}
@@ -3049,11 +3029,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -119.73
       objectReference: {fileID: 0}
-    - target: {fileID: 2236923945742107661, guid: f0ad154101fddbb42bce08a04fc7a72f,
-        type: 3}
-      propertyPath: turnOnMagnetism
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4520024211673450512, guid: f0ad154101fddbb42bce08a04fc7a72f,
         type: 3}
       propertyPath: m_IsActive
@@ -3164,11 +3139,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -119.73
-      objectReference: {fileID: 0}
-    - target: {fileID: 2236923945742107661, guid: f0ad154101fddbb42bce08a04fc7a72f,
-        type: 3}
-      propertyPath: turnOnMagnetism
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4520024211673450512, guid: f0ad154101fddbb42bce08a04fc7a72f,
         type: 3}
