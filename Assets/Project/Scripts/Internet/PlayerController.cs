@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
     public GroundCheck groundChecker;
     
     [Header("Movement")]
-    [SerializeField] private float speedup = 7.5f;
+    [SerializeField] private float speedup = 10f;
 
     private void FixedUpdate()
     {

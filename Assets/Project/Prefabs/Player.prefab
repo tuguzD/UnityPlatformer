@@ -3008,7 +3008,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ball: {fileID: 1333073185178226399}
   groundChecker: {fileID: 2128082178890900813}
-  speedup: 7.5
+  speedup: 10
   fullImpulsePower: 15
   fractureImpulsePower: 10
 --- !u!114 &7409395575140995745
