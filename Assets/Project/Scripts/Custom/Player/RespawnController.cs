@@ -10,12 +10,16 @@ public class RespawnController : MonoBehaviour
 
     private void Update()
     {
+        var height = _ball.transform.position.y;
+        var fellUp = height > GetComponent<BallCameraRig>().
+            heightSurfaceTop - killHeight;
+        var fellDown = height < killHeight;
+
         var destroyed = Mathf.Approximately(
             _quantities.durability.FillAmount, Mathf.Epsilon);
-        var fellOff = _ball.transform.position.y < killHeight;
 
         // Check for "game over" conditions
-        if (destroyed || fellOff) GameOver();
+        if (fellUp || fellDown || destroyed) GameOver();
     }
 
     private void GameOver()

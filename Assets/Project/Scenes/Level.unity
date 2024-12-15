@@ -6938,7 +6938,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1812832993}
   m_Layer: 0
-  m_Name: Hot Floor
+  m_Name: Hot Floor #1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7181,7 +7181,7 @@ MonoBehaviour:
     direction: 0
   - cpc: {fileID: 1878938965}
     isActive: 1
-    position: {x: 0, y: 3, z: 190}
+    position: {x: 0, y: 3, z: 185}
     bounds:
       m_Center: {x: 0, y: 0, z: 0}
       m_Extent: {x: 10, y: 10, z: 1}
@@ -7200,7 +7200,7 @@ MonoBehaviour:
       m_Center: {x: 0, y: 0, z: 0}
       m_Extent: {x: 10, y: 5, z: 1}
     direction: 0
-  selectedIndices: 
+  selectedIndices: 02000000
   entityMode: 2
   activationMode: 2
   activationOrder: 0
