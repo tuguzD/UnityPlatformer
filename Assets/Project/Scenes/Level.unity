@@ -7180,14 +7180,14 @@ MonoBehaviour:
       m_Extent: {x: 10, y: 10, z: 1}
     direction: 0
   - cpc: {fileID: 1878938965}
-    isActive: 0
+    isActive: 1
     position: {x: 0, y: 3, z: 190}
     bounds:
       m_Center: {x: 0, y: 0, z: 0}
       m_Extent: {x: 10, y: 10, z: 1}
     direction: 0
   - cpc: {fileID: 1878938965}
-    isActive: 1
+    isActive: 0
     position: {x: 0, y: 3, z: 300}
     bounds:
       m_Center: {x: 0, y: 0, z: 0}

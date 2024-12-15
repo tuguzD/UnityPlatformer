@@ -1,4 +1,4 @@
-// Total changes: 8
+// Total changes: 9
 
 using BSGames.Modules.GroundCheck;
 using Ditzelgames;
@@ -65,19 +65,23 @@ public class PlayerController : MonoBehaviour
         if (_cachedPosition == Vector2.zero) return;
         var difference = _cachedPosition - _input.Game.Position.ReadValue<Vector2>();
 
-        // Change #3: prevent shooting if the input is too small to prevent loosing pick-ups
+        // Change #3: determine direction of impulse based on ball's position
+        var direction = ball.transform.position.y < GetComponent<BallCameraRig>().heightSurfaceTop / 2f;
+        difference.y *= direction ? 1 : -1;
+
+        // Change #4: prevent shooting if the input is too small to prevent loosing pick-ups
         if (!Mathf.Approximately(Mathf.Abs(difference.magnitude), Mathf.Epsilon))
             Shoot(difference);
     }
 
     private void Shoot(Vector2 input)
     {
-        // Change #4: make force uniform, or dependent only on direction of user input
+        // Change #5: make force uniform, or dependent only on direction of user input
         var force = new Vector3(input.x, input.y, input.y).
             normalized * (speedup * _quantities.velocity.MinimumAmount);
         var anyPickUps = _pickUps.pickUpParent.childCount > 0;
 
-        // Change #5: spawn pick-up with an opposite force (Newton's Third Law)...
+        // Change #6: spawn pick-up with an opposite force (Newton's Third Law)...
         if (anyPickUps) _pickUps.Use(-force * fullImpulsePower);
         // ...or consume ball's durability for a weaker impulse
         else
@@ -90,7 +94,7 @@ public class PlayerController : MonoBehaviour
         ball.AddForce(force * (anyPickUps ? fullImpulsePower : fractureImpulsePower));
     }
 
-    // Change #6: cancel shooting if player ball isn't active
+    // Change #7: cancel shooting if player ball isn't active
     private void Update()
     {
         if (!ball.gameObject.activeInHierarchy)
