@@ -4,6 +4,7 @@ public class ScaleFractured : ScaleToDestroy
 {
     private void Start()
     {
+        speed = 0.001f;
         GetComponentInChildren<Rigidbody>().mass /= 100f;
         GetComponentInChildren<Fracture>().CauseFracture();
     }
