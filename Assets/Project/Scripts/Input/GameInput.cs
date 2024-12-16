@@ -70,7 +70,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""96b69729-a875-45d0-ab0a-eb696c19ac2b"",
-                    ""path"": ""<Touchscreen>/primaryTouch/tap"",
+                    ""path"": ""<Touchscreen>/Press"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -132,17 +132,6 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""e6e035e3-851a-4d2e-9f8d-72e15027061e"",
-                    ""path"": ""<Touchscreen>/delta"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Movement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",

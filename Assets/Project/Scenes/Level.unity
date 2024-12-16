@@ -22053,7 +22053,7 @@ MonoBehaviour:
   checkPointCount: 5
   checkPoints:
   - cpc: {fileID: 1878938965}
-    isActive: 0
+    isActive: 1
     position: {x: 0, y: 3, z: 0}
     bounds:
       m_Center: {x: 0, y: 0, z: 0}
@@ -22067,7 +22067,7 @@ MonoBehaviour:
       m_Extent: {x: 10, y: 10, z: 1}
     direction: 0
   - cpc: {fileID: 1878938965}
-    isActive: 1
+    isActive: 0
     position: {x: 0, y: 3, z: 185}
     bounds:
       m_Center: {x: 0, y: 0, z: 0}
@@ -22087,7 +22087,7 @@ MonoBehaviour:
       m_Center: {x: 0, y: 0, z: 0}
       m_Extent: {x: 10, y: 5, z: 1}
     direction: 0
-  selectedIndices: 02000000
+  selectedIndices: 
   entityMode: 2
   activationMode: 2
   activationOrder: 0

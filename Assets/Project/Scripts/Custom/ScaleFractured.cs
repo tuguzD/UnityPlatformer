@@ -8,14 +8,9 @@ public class ScaleFractured : ScaleToDestroy
         GetComponentInChildren<Fracture>().CauseFracture();
     }
 
-    private void FixedUpdate()
+    private new void FixedUpdate()
     {
         foreach (Transform _ in gameObject.transform)
-            foreach (Transform child in _)
-            {
-                child.transform.localScale -= Vector3.one * speed;
-                if (child.transform.localScale.x <= 0f)
-                    Destroy(gameObject);
-            }
+            foreach (Transform child in _) ApplyLogic(child);
     }
 }

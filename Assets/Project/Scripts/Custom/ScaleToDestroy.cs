@@ -4,9 +4,14 @@ public class ScaleToDestroy : MonoBehaviour
 {
     public float speed = 0.001f;
 
-    private void FixedUpdate()
+    protected void FixedUpdate()
     {
-        transform.localScale -= Vector3.one * speed;
-        if (transform.localScale.x <= 0f) Destroy(gameObject);
+        ApplyLogic(transform);
+    }
+
+    protected void ApplyLogic(Transform @object)
+    {
+        @object.localScale -= Vector3.one * speed;
+        if (@object.localScale.x <= 0.01f) Destroy(gameObject);
     }
 }

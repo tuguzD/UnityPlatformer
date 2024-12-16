@@ -49,9 +49,7 @@ public class PlayerController : MonoBehaviour
 
         // Change #2: allow player to only hit its ball to initiate shooting
         var ray = GetComponent<PlayerInput>().camera.ScreenPointToRay(position);
-        var rayCast = Physics.Raycast(
-            ray, out var hit, int.MaxValue,
-            ~0, QueryTriggerInteraction.Ignore);
+        var rayCast = Physics.Raycast(ray, out var hit);
 
         var condition = rayCast && hit.collider.CompareTag("Player");
         _cachedPosition = condition ? position : Vector2.zero;
@@ -116,7 +114,7 @@ public class PlayerController : MonoBehaviour
         _input.Game.Impulse.started += CachePosition;
         _input.Game.Impulse.canceled += UseCachedPosition;
     }
-
+    
     private void OnDisable()
     {
         _input.Game.Impulse.started -= CachePosition;
