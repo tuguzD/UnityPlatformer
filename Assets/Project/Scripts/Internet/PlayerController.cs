@@ -30,8 +30,16 @@ public class PlayerController : MonoBehaviour
         // Change #2: disable input movement if not grounded
         if (!groundChecker.IsGrounded()) return;
         var movement = _input.Game.Movement.ReadValue<Vector2>();
+        AddForce(movement.x, movement.y);
 
-        ball.AddForce(new Vector3(movement.x, 0.0f, movement.y) * (speedup * _quantities.size.Amount));
+        if (_tapPlayer || !_input.Game.Impulse.inProgress || !groundChecker.IsGrounded()) return;
+        movement = _input.Game.Position.ReadValue<Vector2>() - _cachedPosition;
+        AddForce(Mathf.Sign(movement.x), Mathf.Sign(movement.y));
+    }
+
+    private void AddForce(float x, float y)
+    {
+        ball.AddForce(new Vector3(x, 0.0f, y) * (speedup * _quantities.size.Amount));
     }
     
     /* Source of code below:
@@ -42,25 +50,25 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float fractureImpulsePower = 10.0f;
     private Vector2 _cachedPosition;
 
+    private bool _tapPlayer;
+
     private void CachePosition(InputAction.CallbackContext context)
     {
         // Change #1: use new input system instead of consuming mouse pointer position
-        var position = _input.Game.Position.ReadValue<Vector2>();
+        _cachedPosition = _input.Game.Position.ReadValue<Vector2>();
 
         // Change #2: allow player to only hit its ball to initiate shooting
-        var ray = GetComponent<PlayerInput>().camera.ScreenPointToRay(position);
+        var ray = GetComponent<PlayerInput>().camera.ScreenPointToRay(_cachedPosition);
         var rayCast = Physics.Raycast(ray, out var hit);
 
-        var condition = rayCast && hit.collider.CompareTag("Player");
-        _cachedPosition = condition ? position : Vector2.zero;
-
+        _tapPlayer = rayCast && hit.collider.CompareTag("Player");
         Debug.DrawLine(ray.origin, hit.point, duration: 5f,
-            color: condition ? Color.green : Color.red);
+            color: _tapPlayer ? Color.green : Color.red);
     }
 
     private void UseCachedPosition(InputAction.CallbackContext context)
     {
-        if (_cachedPosition == Vector2.zero) return;
+        if (!_tapPlayer) return;
         var difference = _cachedPosition - _input.Game.Position.ReadValue<Vector2>();
 
         // Change #3: determine direction of impulse based on ball's position
@@ -96,7 +104,7 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         if (!ball.gameObject.activeInHierarchy)
-            _cachedPosition = Vector2.zero;
+            _tapPlayer = false;
     }
 
     /* Use new input system with examples borrowed from:
