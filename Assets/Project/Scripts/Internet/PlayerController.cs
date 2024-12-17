@@ -56,7 +56,7 @@ public class PlayerController : MonoBehaviour
     
     /* Source of code below:
      * https://gist.github.com/seferciogluecce/e57dd9e884bd38d2925f3de7826f5dd4 */
-    // Total changes: 6
+    // Total changes: 7
     [Header("Impulse")]
     [SerializeField] private float fullImpulsePower = 15.0f;
     [SerializeField] private float fractureImpulsePower = 10.0f;
