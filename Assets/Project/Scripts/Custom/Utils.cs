@@ -1,4 +1,3 @@
-using BSGames.Modules.GroundCheck;
 using UnityEngine;
 
 public static class Utils
@@ -44,9 +43,5 @@ public static class Utils
 
         self.transform.SetParent(temp.transform);
         temp.AddComponent<ScaleFractured>();
-
-        // Restore position of a ground checking script
-        if (self.TryGetComponent(out GroundCheck check))
-            check.GroundChecker.SetTransform(transform);
     }
 }

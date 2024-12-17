@@ -1,17 +1,16 @@
-// Total changes: 9
+// Total changes: 10
 
-using BSGames.Modules.GroundCheck;
 using Ditzelgames;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Linq;
 
 public class PlayerController : MonoBehaviour
 {
     /* Source of code below:
      * https://www.youtube.com/watch?v=FsYI9D3aukY&list=PLD8pFQ5A8vv6U4Sm0JKdcNGGOOZNoX2lv&index=2 */
-    // Total changes: 2
+    // Total changes: 3
     public Rigidbody ball;
-    public GroundCheck groundChecker;
     
     [Header("Movement")]
     [SerializeField] private float speedup = 10f;
@@ -21,25 +20,38 @@ public class PlayerController : MonoBehaviour
         var range = _quantities.velocity;
         var speed = ball.velocity;
 
-        // Change #1: set minimum speed if it's too low
+        // Change #1: set minimum speed if it's too low...
         if (speed.z < range.MinimumAmount) PhysicsHelper.ApplyForceToReachVelocity(
             velocity: Vector3.forward * range.MinimumAmount, rigidbody: ball, force: float.MaxValue);
-        // set maximum speed: https://discussions.unity.com/t/limiting-rigidbody-speed/44191/2
+        // ...and maximum speed: https://discussions.unity.com/t/limiting-rigidbody-speed/44191/2
         if (speed.z > range.MaximumAmount) ball.velocity = speed.normalized * range.MaximumAmount;
 
         // Change #2: disable input movement if not grounded
-        if (!groundChecker.IsGrounded()) return;
+        if (!IsGrounded) return;
         var movement = _input.Game.Movement.ReadValue<Vector2>();
         AddForce(movement.x, movement.y);
 
-        if (_tapPlayer || !_input.Game.Impulse.inProgress || !groundChecker.IsGrounded()) return;
+        // Change #3: add alternative movement control by dragging from point on screen
+        if (_tapPlayer || !_input.Game.Impulse.inProgress || !IsGrounded) return;
         movement = _input.Game.Position.ReadValue<Vector2>() - _cachedPosition;
         AddForce(Mathf.Sign(movement.x), Mathf.Sign(movement.y));
     }
 
     private void AddForce(float x, float y)
     {
-        ball.AddForce(new Vector3(x, 0.0f, y) * (speedup * _quantities.size.Amount));
+        ball.AddForce(new Vector3(x, 0, y) * (speedup * _quantities.size.Amount));
+    }
+
+    private float Radius => ball.GetComponent<SphereCollider>().radius;
+    private bool IsGrounded => Physics.OverlapSphere(
+            ball.position, Radius * 1.5f,
+            ~0, QueryTriggerInteraction.Ignore)
+        .Any(other => !other.CompareTag("Player"));
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = IsGrounded ? Color.green : Color.red;
+        Gizmos.DrawWireSphere(ball.position, Radius * 1.5f);
     }
     
     /* Source of code below:
