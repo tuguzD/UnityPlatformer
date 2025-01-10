@@ -30579,7 +30579,7 @@ MonoBehaviour:
   HideGizmos: 0
   ShowAbsolutePosition: 0
   guiScale: 4
-  checkPointCount: 7
+  checkPointCount: 8
   checkPoints:
   - cpc: {fileID: 1878938965}
     isActive: 1
@@ -30629,6 +30629,13 @@ MonoBehaviour:
     bounds:
       m_Center: {x: 0, y: 0, z: 0}
       m_Extent: {x: 10, y: 5, z: 1}
+    direction: 0
+  - cpc: {fileID: 1878938965}
+    isActive: 0
+    position: {x: 0, y: 3, z: 1105}
+    bounds:
+      m_Center: {x: 0, y: 5.5, z: 0}
+      m_Extent: {x: 10.5, y: 9, z: 3}
     direction: 0
   selectedIndices: 
   entityMode: 2
