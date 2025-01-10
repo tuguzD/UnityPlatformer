@@ -1,5 +1,6 @@
 using Gaskellgames.CameraController;
 using SmartPoint;
+using Mirror;
 using System.Collections;
 using UnityEngine;
 
@@ -62,7 +63,8 @@ public class RespawnController : MonoBehaviour
 
     private void Start()
     {
-        _checkPoints = GetComponentInParent<CheckPointController>();
+        _checkPoints = FindObjectOfType<NetworkManager>().
+            GetComponentInChildren<CheckPointController>();
         _playerController = GetComponent<PlayerController>();
         _pickUps = GetComponent<PickUpsController>();
 

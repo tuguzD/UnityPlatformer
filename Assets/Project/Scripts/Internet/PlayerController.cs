@@ -1,11 +1,12 @@
 // Total changes: 10
 
 using Ditzelgames;
+using Mirror;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using System.Linq;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : NetworkBehaviour
 {
     /* Source of code below:
      * https://www.youtube.com/watch?v=FsYI9D3aukY&list=PLD8pFQ5A8vv6U4Sm0JKdcNGGOOZNoX2lv&index=2 */
@@ -17,6 +18,8 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (!isLocalPlayer) return;
+
         var range = _quantities.velocity;
         var speed = ball.velocity;
 

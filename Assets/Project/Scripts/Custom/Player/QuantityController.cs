@@ -39,9 +39,9 @@ public class QuantityController : MonoBehaviour
         durability.FillAmount = 1f;
 
         // Restore player ball size and velocity
+        if (!_playerController) return;
         _playerController.ball.velocity = Vector3.zero;
-        _playerController.ball.
-            transform.localScale = Vector3.one;
+        _playerController.ball.transform.localScale = Vector3.one;
     }
 
     private PickUpsController _pickUps;
