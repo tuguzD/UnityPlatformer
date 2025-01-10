@@ -38,8 +38,9 @@ public class BallCameraRig : MonoBehaviour
 
     private void Start()
     {
-        _cameraRig = GetComponentInChildren<CameraRig>();
+        _cameraRig = FindObjectOfType<CameraRig>();
         _playerController = GetComponent<PlayerController>();
+        _cameraRig.CameraFollow = _playerController.ball.transform;
 
         var localPosition = _playerController.ball.transform.localPosition.y;
         _heightMiddle = new Range(0 + localPosition, heightSurfaceTop - localPosition);

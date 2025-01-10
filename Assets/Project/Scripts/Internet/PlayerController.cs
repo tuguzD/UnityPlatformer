@@ -70,7 +70,7 @@ public class PlayerController : MonoBehaviour
         _cachedPosition = _input.Game.Position.ReadValue<Vector2>();
 
         // Change #2: allow player to only hit its ball to initiate shooting
-        var ray = GetComponent<PlayerInput>().camera.ScreenPointToRay(_cachedPosition);
+        var ray = FindObjectOfType<Camera>().ScreenPointToRay(_cachedPosition);
         var rayCast = Physics.Raycast(ray, out var hit);
 
         _tapPlayer = rayCast && hit.collider.CompareTag("Player");
