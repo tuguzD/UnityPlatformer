@@ -1,8 +1,9 @@
+using Mirror;
 using Gaskellgames;
 using Gaskellgames.CameraController;
 using UnityEngine;
 
-public class BallCameraRig : MonoBehaviour
+public class BallCameraRig : NetworkBehaviour
 {
     [SerializeField] private Vector3 position = new(0, 9, -9);
     private const float DeltaZ = -2;
@@ -15,6 +16,7 @@ public class BallCameraRig : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (!isLocalPlayer) return;
         var height = _playerController.ball.position.y;
 
         if (!_heightMiddle.Includes(height)) return;
@@ -40,7 +42,7 @@ public class BallCameraRig : MonoBehaviour
     {
         _cameraRig = FindObjectOfType<CameraRig>();
         _playerController = GetComponent<PlayerController>();
-        _cameraRig.CameraFollow = _playerController.ball.transform;
+        if (isLocalPlayer) _cameraRig.CameraFollow = _playerController.ball.transform;
 
         var localPosition = _playerController.ball.transform.localPosition.y;
         _heightMiddle = new Range(0 + localPosition, heightSurfaceTop - localPosition);
