@@ -279,6 +279,13 @@
       "dependencies": {},
       "hash": "d1ef610e9fe3ad0b490cce91594449fc0af809a6"
     },
+    "com.vladfaust.unitywakatime": {
+      "version": "https://github.com/vladfaust/unity-wakatime.git#package",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "4dedbeac2e2d61c5c892e517728d2c4c74ce0acc"
+    },
     "com.unity.modules.ai": {
       "version": "1.0.0",
       "depth": 0,
