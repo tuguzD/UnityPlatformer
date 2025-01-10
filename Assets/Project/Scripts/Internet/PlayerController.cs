@@ -2,6 +2,7 @@
 
 using Ditzelgames;
 using Mirror;
+using Gaskellgames.CameraController;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -151,5 +152,12 @@ public class PlayerController : NetworkBehaviour
     {
         _pickUps = GetComponent<PickUpsController>();
         _quantities = GetComponent<QuantityController>();
+    }
+
+    /* Make "Main Camera" on a scene follow player ball, as it's suggested in:
+     * https://mirror-networking.gitbook.io/docs/manual/general/getting-started#player-movement */
+    public override void OnStartLocalPlayer()
+    {
+        FindObjectOfType<CameraRig>().CameraFollow = ball.transform;
     }
 }
