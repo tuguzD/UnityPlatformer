@@ -1,8 +1,9 @@
 using Gaskellgames;
 using Gaskellgames.CameraController;
+using Mirror;
 using UnityEngine;
 
-public class BallCameraRig : MonoBehaviour
+public class BallCameraRig : NetworkBehaviour
 {
     [SerializeField] private Vector3 position = new(0, 9, -9);
     private const float DeltaZ = -2;
@@ -15,8 +16,9 @@ public class BallCameraRig : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (!isLocalPlayer) return;
+        
         var height = _playerController.ball.position.y;
-
         if (!_heightMiddle.Includes(height)) return;
         var ratio = _heightMiddle.InverseLerp(height);
 
