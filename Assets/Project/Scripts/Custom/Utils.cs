@@ -39,7 +39,7 @@ public static class Utils
         self = !copy ? self : Object.Instantiate(
             self, transform.position, transform.rotation);
 
-        if (copy) self.GetComponent<PredictedRigidbody>().enabled = false;
+        if (copy) Object.Destroy(self.GetComponent<PredictedRigidbody>());
 
         self.tag = "Break";
         self.transform.localScale *= fragmentScale;
