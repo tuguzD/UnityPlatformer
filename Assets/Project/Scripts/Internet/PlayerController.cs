@@ -48,8 +48,8 @@ public class PlayerController : NetworkBehaviour
 
     private float Radius => ball.GetComponent<SphereCollider>().radius;
     private bool IsGrounded => Physics.OverlapSphere(
-            ball.position, Radius * 1.5f,
-            ~0, QueryTriggerInteraction.Ignore)
+            position: ball.position,queryTriggerInteraction: QueryTriggerInteraction.Ignore,
+            radius: ball.GetComponent<SphereCollider>() ? Radius * 1.5f : 0f, layerMask: ~0)
         .Any(other => !other.CompareTag("Player"));
 
     private void OnDrawGizmos()

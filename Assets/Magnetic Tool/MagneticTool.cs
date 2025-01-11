@@ -134,7 +134,7 @@ public class MagneticTool : MonoBehaviour
 
     private void Update()
     {
-        if (magneticArea.radius != magneticDistance)
+        if (magneticArea && !Mathf.Approximately(magneticArea.radius, magneticDistance))
         {
             magneticArea.radius = magneticDistance;
         }
