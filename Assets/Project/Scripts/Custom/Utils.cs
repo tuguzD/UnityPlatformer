@@ -1,3 +1,4 @@
+using Mirror;
 using UnityEngine;
 
 public static class Utils
@@ -37,6 +38,8 @@ public static class Utils
         // Fracture a copy of an object
         self = !copy ? self : Object.Instantiate(
             self, transform.position, transform.rotation);
+
+        if (copy) self.GetComponent<PredictedRigidbody>().enabled = false;
 
         self.tag = "Break";
         self.transform.localScale *= fragmentScale;
