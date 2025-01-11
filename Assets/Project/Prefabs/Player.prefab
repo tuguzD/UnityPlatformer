@@ -407,7 +407,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8116750705412178541}
-  - component: {fileID: 6892863563825145340}
   - component: {fileID: 3735117961372711220}
   - component: {fileID: 440014973321757132}
   m_Layer: 0
@@ -434,19 +433,6 @@ Transform:
   - {fileID: 5903258022085961329}
   m_Father: {fileID: 7562962934770653945}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6892863563825145340
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1415490882047843288}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 800d413353624b4893badcd7c96383de, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  follow: {fileID: 178567492801604182}
 --- !u!114 &3735117961372711220
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1589,7 +1575,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0
   predictedRigidbody: {fileID: 1333073185178226399}
-  mode: 0
+  mode: 1
   motionSmoothingVelocityThreshold: 0.1
   motionSmoothingAngularVelocityThreshold: 5
   motionSmoothingTimeTolerance: 0.5
@@ -1601,7 +1587,7 @@ MonoBehaviour:
   rotationCorrectionThreshold: 5
   oneFrameAhead: 1
   snapThreshold: 2
-  showGhost: 1
+  showGhost: 0
   ghostVelocityThreshold: 0.1
   localGhostMaterial: {fileID: 2100000, guid: 411a48b4a197d4924bec3e3809bc9320, type: 2}
   remoteGhostMaterial: {fileID: 2100000, guid: 04f0b2088c857414393bab3b80356776, type: 2}
@@ -2949,6 +2935,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6b0dafa1f0ffcb4f8ea2d812a8b42dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   position: {x: 0, y: 9, z: -9}
   rotationX: 20
   heightSurfaceTop: 17.32
