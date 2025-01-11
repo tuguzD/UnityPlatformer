@@ -84,7 +84,7 @@ public class PlayerController : NetworkBehaviour
 
     private void UseCachedPosition(InputAction.CallbackContext context)
     {
-        if (!_tapPlayer) return;
+        if (!_tapPlayer || !isLocalPlayer) return;
         var difference = _cachedPosition - _input.Game.Position.ReadValue<Vector2>();
 
         // Change #3: determine direction of impulse based on ball's position
@@ -152,6 +152,9 @@ public class PlayerController : NetworkBehaviour
     {
         _pickUps = GetComponent<PickUpsController>();
         _quantities = GetComponent<QuantityController>();
+        
+        if (!isLocalPlayer)
+            GetComponentInChildren<Canvas>().gameObject.SetActive(false);
     }
 
     /* Make "Main Camera" on a scene follow player ball, as it's suggested in:
