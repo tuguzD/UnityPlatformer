@@ -13,8 +13,9 @@ public class MagnetismController : MonoBehaviour
     {
         var magnetisation = _quantities.magnetisation.FillAmount;
 
-        foreach (var material in forceField.materials)
-            material.SetOpacity(_fieldOpacity.Lerp(magnetisation));
+        forceField.materials[0].SetOpacity(_fieldOpacity.Lerp(magnetisation));
+        forceField.materials[1].SetOpacity(_fieldOpacity.Lerp(magnetisation));
+        
         forceField.UniformScale(_fieldScale.Lerp(magnetisation));
 
         DefyGravity(magnetisation, _playerController.ball);

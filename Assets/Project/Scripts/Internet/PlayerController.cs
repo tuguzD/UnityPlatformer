@@ -19,7 +19,14 @@ public class PlayerController : NetworkBehaviour
 
     private void FixedUpdate()
     {
-        if (!isLocalPlayer) return;
+        if (!isLocalPlayer)
+        {
+            if (ball.GetComponent<Outline>()) return;
+            var outline = ball.gameObject.AddComponent<Outline>();
+            outline.OutlineColor = Color.green;
+
+            return;
+        }
 
         var range = _quantities.velocity;
         var speed = ball.velocity;
@@ -152,7 +159,7 @@ public class PlayerController : NetworkBehaviour
     {
         _pickUps = GetComponent<PickUpsController>();
         _quantities = GetComponent<QuantityController>();
-        
+
         if (!isLocalPlayer)
             GetComponentInChildren<Canvas>().gameObject.SetActive(false);
     }
