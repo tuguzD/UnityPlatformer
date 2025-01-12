@@ -19,14 +19,7 @@ public class PlayerController : NetworkBehaviour
 
     private void FixedUpdate()
     {
-        if (!isLocalPlayer)
-        {
-            if (ball.GetComponent<Outline>()) return;
-            var outline = ball.gameObject.AddComponent<Outline>();
-            outline.OutlineColor = Color.green;
-
-            return;
-        }
+        if (!isLocalPlayer) return;
 
         var range = _quantities.velocity;
         var speed = ball.velocity;
