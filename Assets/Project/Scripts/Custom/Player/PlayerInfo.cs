@@ -5,8 +5,8 @@ using Random = UnityEngine.Random;
 
 public class PlayerInfo : NetworkBehaviour
 {
-    [SyncVar] public string playerName = "PLAYER_";
-    [SyncVar] public Color playerColor = Color.white;
+    [SyncVar] public string playerName;
+    [SyncVar] public Color playerColor;
 
     private void FixedUpdate()
     {
@@ -26,10 +26,10 @@ public class PlayerInfo : NetworkBehaviour
     {
         _ball = transform.parent.GetComponentInChildren<Rigidbody>();
 
-        playerName += netId;
+        playerName = "PLAYER_" + netId;
         playerColor = Random.ColorHSV(hueMin: 0f, hueMax: 1f,
             saturationMin: 1f, saturationMax: 1f, valueMin: 1f, valueMax: 1f);
-        
+
         var nameText = GetComponent<TextMeshPro>();
         nameText.text = playerName;
         nameText.color = playerColor;
