@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "468351421082",
-    "project_id": "platformer-849fc",
-    "storage_bucket": "platformer-849fc.firebasestorage.app"
+    "project_number": "404305162181",
+    "project_id": "tuguzd-unity-platformer",
+    "storage_bucket": "tuguzd-unity-platformer.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:468351421082:android:57f69b8d95049c5abd6d23",
+        "mobilesdk_app_id": "1:404305162181:android:7fcaa48ce1208c442ae5ac",
         "android_client_info": {
           "package_name": "com.tuguzd.games.platformer"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyCiX3t4ZTqT78t6QQlmowF-41xTvvHzyM8"
+          "current_key": "AIzaSyAUANp_V9dXBHr11rcoZpTGSc7FcjSSerI"
         }
       ],
       "services": {
