@@ -20,7 +20,8 @@ namespace Mirror.Discovery
             if (networkDiscovery == null)
             {
                 networkDiscovery = GetComponent<NetworkDiscovery>();
-                UnityEditor.Events.UnityEventTools.AddPersistentListener(networkDiscovery.OnServerFound, OnDiscoveredServer);
+                UnityEditor.Events.UnityEventTools.AddPersistentListener(
+                    networkDiscovery.OnServerFound, OnDiscoveredServer);
                 UnityEditor.Undo.RecordObjects(new Object[] { this, networkDiscovery }, "Set NetworkDiscovery");
             }
         }
@@ -40,17 +41,21 @@ namespace Mirror.Discovery
 
         void DrawGUI()
         {
-            GUILayout.BeginArea(new Rect(10, 10, 300, 500));
+            GUILayout.BeginArea(new Rect(10, 10, Screen.width * 0.975f, Screen.height / 15f));
             GUILayout.BeginHorizontal();
 
-            if (GUILayout.Button("Find Servers"))
+            GUI.skin.button.fontSize = GUI.skin.label.fontSize = 30;
+
+            if (GUILayout.Button("Find Servers",
+                    GUILayout.ExpandWidth(true), GUILayout.ExpandHeight(true)))
             {
                 discoveredServers.Clear();
                 networkDiscovery.StartDiscovery();
             }
 
             // LAN Host
-            if (GUILayout.Button("Start Host"))
+            if (GUILayout.Button("Start Host",
+                    GUILayout.ExpandWidth(true), GUILayout.ExpandHeight(true)))
             {
                 discoveredServers.Clear();
                 NetworkManager.singleton.StartHost();
@@ -58,18 +63,21 @@ namespace Mirror.Discovery
             }
 
             // Dedicated server
-            if (GUILayout.Button("Start Server"))
-            {
-                discoveredServers.Clear();
-                NetworkManager.singleton.StartServer();
-                networkDiscovery.AdvertiseServer();
-            }
+            // if (GUILayout.Button("Start Server", 
+            //         GUILayout.ExpandWidth(true), GUILayout.ExpandHeight(true)))
+            // {
+            //     discoveredServers.Clear();
+            //     NetworkManager.singleton.StartServer();
+            //     networkDiscovery.AdvertiseServer();
+            // }
 
             GUILayout.EndHorizontal();
 
             // show list of found server
-
-            GUILayout.Label($"Discovered Servers [{discoveredServers.Count}]:");
+            GUILayout.Label(
+                $"Discovered Servers [{discoveredServers.Count}]:",
+                GUILayout.ExpandWidth(true), GUILayout.ExpandHeight(true)
+            );
 
             // servers
             scrollViewPos = GUILayout.BeginScrollView(scrollViewPos);
@@ -84,12 +92,13 @@ namespace Mirror.Discovery
 
         void StopButtons()
         {
-            GUILayout.BeginArea(new Rect(10, 40, 100, 25));
+            GUILayout.BeginArea(new Rect(10, 10, Screen.width * 0.975f, Screen.height / 30f));
 
             // stop host if host mode
             if (NetworkServer.active && NetworkClient.isConnected)
             {
-                if (GUILayout.Button("Stop Host"))
+                if (GUILayout.Button("Stop Host",
+                        GUILayout.ExpandWidth(true), GUILayout.ExpandHeight(true)))
                 {
                     NetworkManager.singleton.StopHost();
                     networkDiscovery.StopDiscovery();
@@ -98,7 +107,8 @@ namespace Mirror.Discovery
             // stop client if client-only
             else if (NetworkClient.isConnected)
             {
-                if (GUILayout.Button("Stop Client"))
+                if (GUILayout.Button("Stop Client",
+                        GUILayout.ExpandWidth(true), GUILayout.ExpandHeight(true)))
                 {
                     NetworkManager.singleton.StopClient();
                     networkDiscovery.StopDiscovery();
@@ -107,7 +117,8 @@ namespace Mirror.Discovery
             // stop server if server-only
             else if (NetworkServer.active)
             {
-                if (GUILayout.Button("Stop Server"))
+                if (GUILayout.Button("Stop Server",
+                        GUILayout.ExpandWidth(true), GUILayout.ExpandHeight(true)))
                 {
                     NetworkManager.singleton.StopServer();
                     networkDiscovery.StopDiscovery();
