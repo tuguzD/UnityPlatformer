@@ -41,7 +41,7 @@ namespace Mirror.Discovery
 
         void DrawGUI()
         {
-            GUILayout.BeginArea(new Rect(10, 10, Screen.width * 0.975f, Screen.height / 15f));
+            GUILayout.BeginArea(new Rect(10, 50, Screen.width * 0.975f, Screen.height / 15f));
             GUILayout.BeginHorizontal();
 
             GUI.skin.button.fontSize = GUI.skin.label.fontSize = 30;
@@ -92,7 +92,7 @@ namespace Mirror.Discovery
 
         void StopButtons()
         {
-            GUILayout.BeginArea(new Rect(10, 10, Screen.width * 0.975f, Screen.height / 30f));
+            GUILayout.BeginArea(new Rect(10, 50, Screen.width * 0.975f, Screen.height / 30f));
 
             // stop host if host mode
             if (NetworkServer.active && NetworkClient.isConnected)
