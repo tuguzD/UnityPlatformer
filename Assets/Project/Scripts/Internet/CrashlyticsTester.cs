@@ -1,5 +1,7 @@
 using UnityEngine;
 
+/* Source of code below:
+ * https://firebase.google.com/codelabs/understand-unity-games-crashes-using-advanced-crashlytics#3 */
 public class CrashlyticsTester : MonoBehaviour
 {
     // Update is called once per frame
